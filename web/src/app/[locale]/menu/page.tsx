@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getMenuSections } from "@/content/menu";
 import type { Locale } from "@/i18n/routing";
 import { MenuGrid } from "@/components/MenuGrid";
+import { JsonLd } from "@/components/JsonLd";
+import { siteConfig } from "@/lib/config";
 
 export async function generateMetadata({
   params,
@@ -66,6 +68,33 @@ export default async function MenuPage({
           <p className="text-on-surface-dim">{t("empty")}</p>
         )}
       </div>
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Menu",
+          name: t("title"),
+          url: `${siteConfig.url}/${locale}/menu/`,
+          inLanguage: locale,
+          // Ties the menu back to the Restaurant node declared in the layout.
+          provider: { "@id": `${siteConfig.url}/#restaurant` },
+          hasMenuSection: sections.map((section) => ({
+            "@type": "MenuSection",
+            name: section.category.name[locale],
+            hasMenuItem: section.items.map((item) => ({
+              "@type": "MenuItem",
+              name: item.name[locale],
+              description: item.description[locale],
+              url: `${siteConfig.url}/${locale}/menu/${item.slug}/`,
+              offers: {
+                "@type": "Offer",
+                price: (item.price / 100).toFixed(2),
+                priceCurrency: "USD",
+              },
+            })),
+          })),
+        }}
+      />
     </div>
   );
 }

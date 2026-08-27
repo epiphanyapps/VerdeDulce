@@ -30,7 +30,6 @@ export async function generateMetadata({
 
   const name = item.name[locale];
   const description = item.description[locale];
-  const image = item.image ? `${siteConfig.url}${item.image}` : undefined;
 
   return {
     title: name,
@@ -46,14 +45,16 @@ export async function generateMetadata({
     openGraph: {
       title: name,
       description,
-      images: image ? [{ url: image, alt: name }] : undefined,
       type: "article",
+      // og:image is left to the colocated opengraph-image.tsx, which renders a
+      // branded 1200x630 card for every dish — including the ones with no
+      // photograph. Setting `images` here would override that convention and
+      // leave those dishes with no preview image at all.
     },
     twitter: {
       card: "summary_large_image",
       title: name,
       description,
-      images: image ? [image] : undefined,
     },
   };
 }
@@ -165,6 +166,21 @@ export default async function MenuItemPage({
           </ul>
         </section>
       )}
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: siteConfig.name, item: `${siteConfig.url}/${locale}/` },
+            { "@type": "ListItem", position: 2, name: t("title"), item: `${siteConfig.url}/${locale}/menu/` },
+            ...(category
+              ? [{ "@type": "ListItem", position: 3, name: category.name[locale] }]
+              : []),
+            { "@type": "ListItem", position: category ? 4 : 3, name },
+          ],
+        }}
+      />
 
       <JsonLd
         data={{
