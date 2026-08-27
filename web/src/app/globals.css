@@ -102,3 +102,16 @@
 .marquee:focus-within .marquee-track {
   animation-play-state: paused;
 }
+
+/**
+ * Amplify Authenticator card radius.
+ *
+ * The theme's `authenticator.router` slot accepts only colours, shadow and
+ * border width — no radius — so the corners are rounded here instead, to match
+ * the 0.75rem used elsewhere in the site. Everything else about the widget is
+ * themed in components/auth/authTheme.ts.
+ */
+[data-amplify-authenticator] [data-amplify-router] {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
