@@ -6,13 +6,19 @@
 # web/next.config.ts produces plain HTML/CSS/JS, so there is no Next.js server
 # runtime and no Amplify Next-version ceiling to track.
 #
-# Two redirects must be added in the Amplify console (Hosting -> Rewrites and
-# redirects), because a static export has no middleware to negotiate locale:
+# Redirect rules live in the Amplify console, not here. Currently configured:
 #
-#   Source: /       Target: /es/        Type: 302 (Redirect - Temporary)
-#   Source: /<*>    Target: /404.html   Type: 404 (Rewrite)
+#   /                     -> /es/                        302
+#   https://verdedulce.com -> https://www.verdedulce.com  302
 #
-# web/src/app/page.tsx is a client-side fallback if the first rule is missing.
+# The `/` rule handles locale negotiation, which a static export cannot do in
+# middleware; web/src/app/page.tsx is the client-side fallback if it is removed.
+#
+# There is deliberately NO `/<*>` catch-all. Amplify's "404" status is a
+# redirect rather than a rewrite, so pointing it at /404.html produced a 302 to
+# a page that then returned 200 — a soft 404 on every unknown path. With no
+# catch-all, unknown paths return a genuine 404, at the cost of showing
+# Amplify's generic error page instead of the exported 404.html.
 #
 # Package managers differ by phase on purpose: the repo root has yarn.lock
 # committed (the Expo app's), while web/ has its own pnpm-lock.yaml. Each phase

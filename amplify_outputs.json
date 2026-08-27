@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_IOaZuVL28",
+    "user_pool_id": "us-east-1_TQkv0usr7",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "162hp3ve7q3bu6gsbeociah8md",
-    "identity_pool_id": "us-east-1:231e8bc2-b97e-40e3-b7a2-8e8967ebd8f2",
+    "user_pool_client_id": "25ipor4lloeiil6ern62cl3coe",
+    "identity_pool_id": "us-east-1:e9bc11d3-8c87-486c-be2a-b7572a378379",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email"
@@ -24,300 +24,21 @@
     },
     "unauthenticated_identities_enabled": true
   },
-  "data": {
-    "url": "https://lm5dvkzj7zeltmswhf3g4y4lku.appsync-api.us-east-1.amazonaws.com/graphql",
-    "aws_region": "us-east-1",
-    "api_key": "da2-lx5kwmwfjzdjhjk4wi3vfinkxe",
-    "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
-    "authorization_types": [
-      "API_KEY",
-      "AWS_IAM"
-    ],
-    "model_introspection": {
-      "version": 1,
-      "models": {
-        "Item": {
-          "name": "Item",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "name": {
-              "name": "name",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "url": {
-              "name": "url",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "description": {
-              "name": "description",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "price": {
-              "name": "price",
-              "isArray": false,
-              "type": "Int",
-              "isRequired": false,
-              "attributes": []
-            },
-            "calories": {
-              "name": "calories",
-              "isArray": false,
-              "type": "Int",
-              "isRequired": false,
-              "attributes": []
-            },
-            "category": {
-              "name": "category",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "metaData": {
-              "name": "metaData",
-              "isArray": false,
-              "type": "AWSJSON",
-              "isRequired": false,
-              "attributes": []
-            },
-            "available": {
-              "name": "available",
-              "isArray": false,
-              "type": "Boolean",
-              "isRequired": false,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "Items",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "allow": "public",
-                    "provider": "iam",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "allow": "public",
-                    "provider": "apiKey",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "allow": "private",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        },
-        "User": {
-          "name": "User",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "email": {
-              "name": "email",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "available": {
-              "name": "available",
-              "isArray": false,
-              "type": "Boolean",
-              "isRequired": false,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "Users",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "allow": "public",
-                    "provider": "iam",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "allow": "public",
-                    "provider": "apiKey",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  },
-                  {
-                    "allow": "private",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        }
-      },
-      "enums": {},
-      "nonModels": {
-        "RegisterResponse": {
-          "name": "RegisterResponse",
-          "fields": {
-            "email": {
-              "name": "email",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "executionDuration": {
-              "name": "executionDuration",
-              "isArray": false,
-              "type": "Float",
-              "isRequired": false,
-              "attributes": []
-            }
-          }
-        }
-      },
-      "mutations": {
-        "registerUser": {
-          "name": "registerUser",
-          "isArray": false,
-          "type": {
-            "nonModel": "RegisterResponse"
-          },
-          "isRequired": false,
-          "arguments": {
-            "email": {
-              "name": "email",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false
-            }
-          }
-        }
-      }
-    }
-  },
   "storage": {
     "aws_region": "us-east-1",
-    "bucket_name": "amplify-d1ptvrvloahojd-ma-dulcedrivebucketa0ac03f2-yskoeldyixir",
+    "bucket_name": "amplify-d2eocpcmr90v03-ma-dulcedrivebucketa0ac03f2-4twzx6mshlo3",
     "buckets": [
       {
         "name": "dulceDrive",
-        "bucket_name": "amplify-d1ptvrvloahojd-ma-dulcedrivebucketa0ac03f2-yskoeldyixir",
+        "bucket_name": "amplify-d2eocpcmr90v03-ma-dulcedrivebucketa0ac03f2-4twzx6mshlo3",
         "aws_region": "us-east-1"
       }
     ]
   },
-  "version": "1.1",
+  "version": "1.5",
   "analytics": {
     "amazon_pinpoint": {
-      "app_id": "9a4e5d180d13427bacc8c53c5d318d9c",
+      "app_id": "ddec40eed7664310a8e590bef51a82d4",
       "aws_region": "us-east-1"
     }
   }
