@@ -1,21 +1,53 @@
 {
   "categories": [
-    { "id": "tazones",   "name": { "es": "Tazones",             "en": "Bowls" } },
-    { "id": "ensaladas", "name": { "es": "Ensaladas",           "en": "Salads" } },
-    { "id": "proteinas", "name": { "es": "Platos de Proteínas", "en": "Protein Plates" } },
-    { "id": "bebidas",   "name": { "es": "Bebidas",             "en": "Drinks" } }
+    {
+      "id": "tazones",
+      "name": {
+        "es": "Tazones",
+        "en": "Bowls"
+      }
+    },
+    {
+      "id": "ensaladas",
+      "name": {
+        "es": "Ensaladas",
+        "en": "Salads"
+      }
+    },
+    {
+      "id": "proteinas",
+      "name": {
+        "es": "Platos de Proteínas",
+        "en": "Protein Plates"
+      }
+    },
+    {
+      "id": "bebidas",
+      "name": {
+        "es": "Bebidas",
+        "en": "Drinks"
+      }
+    }
   ],
   "items": [
     {
       "id": "550e8400-e29b-41d4-a716-446655440000",
       "slug": "carne-con-ajo-caramelizado",
       "category": "tazones",
-      "image": "menu/CarmelGarlic.png",
+      "image": "/menu/CarmelGarlic.png",
       "price": 1000,
-      "nutrition": { "calories": 860, "protein": 31, "fat": 40, "carbs": 89 },
+      "nutrition": {
+        "calories": 860,
+        "protein": 31,
+        "fat": 40,
+        "carbs": 89
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Carne con Ajo Caramelizado", "en": "Caramelized Garlic Steak" },
+      "name": {
+        "es": "Carne con Ajo Caramelizado",
+        "en": "Caramelized Garlic Steak"
+      },
       "description": {
         "es": "Arroz integral, brócoli picante, tomates, camote, carne con ajo caramelizado, vinagreta de pesto",
         "en": "Brown rice, spicy broccoli, tomatoes, sweet potato, caramelized garlic steak, pesto vinaigrette"
@@ -25,12 +57,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440030",
       "slug": "ensalada-picada-estilo-steakhouse",
       "category": "tazones",
-      "image": "menu/Bowl_Steakhouse_Chopped.png",
+      "image": null,
       "price": 1000,
-      "nutrition": { "calories": 815, "protein": 35, "fat": 57, "carbs": 40 },
+      "nutrition": {
+        "calories": 815,
+        "protein": 35,
+        "fat": 57,
+        "carbs": 40
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Ensalada Picada Estilo Steakhouse", "en": "Steakhouse Chopped Salad" },
+      "name": {
+        "es": "Ensalada Picada Estilo Steakhouse",
+        "en": "Steakhouse Chopped Salad"
+      },
       "description": {
         "es": "Lechuga romana picada, quinoa con hierbas, col rallada, tomates, cebollas crujientes, queso azul, carne con ajo caramelizado, aderezo ranch",
         "en": "Chopped romaine, herbed quinoa, shredded cabbage, tomatoes, crispy onions, blue cheese, caramelized garlic steak, ranch dressing"
@@ -40,12 +80,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440031",
       "slug": "tazon-de-cosecha",
       "category": "tazones",
-      "image": "menu/Bowl_Harvest.png",
+      "image": "/menu/Bowl_Harvest.png",
       "price": 825,
-      "nutrition": { "calories": 765, "protein": 38, "fat": 41, "carbs": 63 },
+      "nutrition": {
+        "calories": 765,
+        "protein": 38,
+        "fat": 41,
+        "carbs": 63
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Tazón de Cosecha", "en": "Harvest Bowl" },
+      "name": {
+        "es": "Tazón de Cosecha",
+        "en": "Harvest Bowl"
+      },
       "description": {
         "es": "Col rizada rallada, arroz integral, camote, almendras tostadas, manzanas, queso de cabra, pollo asado, vinagreta balsámica",
         "en": "Shredded kale, brown rice, sweet potato, roasted almonds, apples, goat cheese, roasted chicken, balsamic vinaigrette"
@@ -55,12 +103,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440032",
       "slug": "pollo-a-la-parmesana-con-pesto",
       "category": "tazones",
-      "image": "menu/SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
+      "image": null,
       "price": 775,
-      "nutrition": { "calories": 540, "protein": 39, "fat": 21, "carbs": 40 },
+      "nutrition": {
+        "calories": 540,
+        "protein": 39,
+        "fat": 21,
+        "carbs": 40
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Pollo a la Parmesana con Pesto", "en": "Chicken Pesto Parm" },
+      "name": {
+        "es": "Pollo a la Parmesana con Pesto",
+        "en": "Chicken Pesto Parm"
+      },
       "description": {
         "es": "Espinaca bebé, quinoa con hierbas, brócoli picante, tomates, pan rallado, pollo asado, parmesano rallado, vinagreta de pesto, salsa picante",
         "en": "Baby spinach, herbed quinoa, spicy broccoli, tomatoes, breadcrumbs, roasted chicken, shaved parmesan, pesto vinaigrette, hot sauce"
@@ -70,12 +126,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440033",
       "slug": "pollo-con-aguacate-y-ranch",
       "category": "tazones",
-      "image": "menu/SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
+      "image": null,
       "price": 1445,
-      "nutrition": { "calories": 705, "protein": 31, "fat": 39, "carbs": 61 },
+      "nutrition": {
+        "calories": 705,
+        "protein": 31,
+        "fat": 39,
+        "carbs": 61
+      },
       "available": true,
       "hidden": true,
-      "name": { "es": "Pollo con Aguacate y Ranch", "en": "Chicken Avocado Ranch" },
+      "name": {
+        "es": "Pollo con Aguacate y Ranch",
+        "en": "Chicken Avocado Ranch"
+      },
       "description": {
         "es": "Lechuga romana picada, arroz blanco, chips de tortilla, manzanas, cebollas en vinagre, aguacate, pollo ennegrecido, aderezo ranch diosa verde",
         "en": "Chopped romaine, white rice, tortilla chips, apples, pickled onions, avocado, blackened chicken, green goddess ranch"
@@ -85,12 +149,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440034",
       "slug": "cesar-de-col-carne",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
+      "image": null,
       "price": 925,
-      "nutrition": { "calories": 720, "protein": 39, "fat": 54, "carbs": 21 },
+      "nutrition": {
+        "calories": 720,
+        "protein": 39,
+        "fat": 54,
+        "carbs": 21
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "César de Col (Carne)", "en": "Kale Caesar (Steak)" },
+      "name": {
+        "es": "César de Col (Carne)",
+        "en": "Kale Caesar (Steak)"
+      },
       "description": {
         "es": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, parmesano rallado, carne con ajo caramelizado, aderezo César, rodaja de lima",
         "en": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, shaved parmesan, caramelized garlic steak, Caesar dressing, lime squeeze"
@@ -100,12 +172,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440035",
       "slug": "cesar-de-col",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
+      "image": null,
       "price": 695,
-      "nutrition": { "calories": 510, "protein": 39, "fat": 32, "carbs": 15 },
+      "nutrition": {
+        "calories": 510,
+        "protein": 39,
+        "fat": 32,
+        "carbs": 15
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "César de Col", "en": "Kale Caesar" },
+      "name": {
+        "es": "César de Col",
+        "en": "Kale Caesar"
+      },
       "description": {
         "es": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, pollo asado, parmesano rallado, aderezo César, rodaja de lima",
         "en": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, roasted chicken, shaved parmesan, Caesar dressing, lime squeeze"
@@ -115,12 +195,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440036",
       "slug": "guacamole-verde",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_Guacamole_Greens.png",
+      "image": null,
       "price": 825,
-      "nutrition": { "calories": 575, "protein": 27, "fat": 33, "carbs": 36 },
+      "nutrition": {
+        "calories": 575,
+        "protein": 27,
+        "fat": 33,
+        "carbs": 36
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Guacamole Verde", "en": "Guacamole Greens" },
+      "name": {
+        "es": "Guacamole Verde",
+        "en": "Guacamole Greens"
+      },
       "description": {
         "es": "Lechuga romana picada, mezcla de lechuga verde, col rallada, tomates, chips de tortilla, cebollas encurtidas, aguacate, pollo asado, rodaja de lima, vinagreta de cilantro limón y jalapeño",
         "en": "Chopped romaine, mixed greens, shredded cabbage, tomatoes, tortilla chips, pickled onions, avocado, roasted chicken, lime squeeze, cilantro lime jalapeño vinaigrette"
@@ -130,12 +218,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440037",
       "slug": "ensalada-de-pollo-a-la-bbq",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_BBQ_Chicken.png",
+      "image": null,
       "price": 825,
-      "nutrition": { "calories": 520, "protein": 22, "fat": 28, "carbs": 38 },
+      "nutrition": {
+        "calories": 520,
+        "protein": 22,
+        "fat": 28,
+        "carbs": 38
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Ensalada de Pollo a la BBQ", "en": "BBQ Chicken Salad" },
+      "name": {
+        "es": "Ensalada de Pollo a la BBQ",
+        "en": "BBQ Chicken Salad"
+      },
       "description": {
         "es": "Pollo ennegrecido, col rallada, cebollas encurtidas, tomates, manzanas, chips de tortilla, lechuga romana picada, col rizada rallada, salsa BBQ con miel, ranch con diosa verde",
         "en": "Blackened chicken, shredded cabbage, pickled onions, tomatoes, apples, tortilla chips, chopped romaine, shredded kale, honey BBQ sauce, green goddess ranch"
@@ -145,12 +241,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440038",
       "slug": "hummus-crujiente",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_Hummus_Crunch.png",
+      "image": null,
       "price": 825,
-      "nutrition": { "calories": 405, "protein": 14, "fat": 19, "carbs": 42 },
+      "nutrition": {
+        "calories": 405,
+        "protein": 14,
+        "fat": 19,
+        "carbs": 42
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Hummus Crujiente", "en": "Hummus Crunch" },
+      "name": {
+        "es": "Hummus Crujiente",
+        "en": "Hummus Crunch"
+      },
       "description": {
         "es": "Lechuga romana picada, col rizada rallada, albahaca, pepinos, col rallada, tomates, pan rallado, garbanzos, cebollas encurtidas, hummus, vinagreta de pesto",
         "en": "Chopped romaine, shredded kale, basil, cucumbers, shredded cabbage, tomatoes, breadcrumbs, chickpeas, pickled onions, hummus, pesto vinaigrette"
@@ -160,12 +264,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440039",
       "slug": "pollo-bufalo",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_Buffalo_Chicken.png",
+      "image": null,
       "price": 895,
-      "nutrition": { "calories": 555, "protein": 31, "fat": 34, "carbs": 32 },
+      "nutrition": {
+        "calories": 555,
+        "protein": 31,
+        "fat": 34,
+        "carbs": 32
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Pollo Búfalo", "en": "Buffalo Chicken" },
+      "name": {
+        "es": "Pollo Búfalo",
+        "en": "Buffalo Chicken"
+      },
       "description": {
         "es": "Lechuga romana picada, col rizada rallada, cilantro, tomates, pan rallado, zanahorias crudas, cebollas encurtidas, queso azul, pollo ennegrecido, aderezo César, salsa picante",
         "en": "Chopped romaine, shredded kale, cilantro, tomatoes, breadcrumbs, raw carrots, pickled onions, blue cheese, blackened chicken, Caesar dressing, hot sauce"
@@ -175,12 +287,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440040",
       "slug": "diosa-super-verde",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Salad_Super_Green_Goddess.png",
+      "image": null,
       "price": 575,
-      "nutrition": { "calories": 455, "protein": 12, "fat": 29, "carbs": 39 },
+      "nutrition": {
+        "calories": 455,
+        "protein": 12,
+        "fat": 29,
+        "carbs": 39
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Diosa Súper Verde", "en": "Super Green Goddess" },
+      "name": {
+        "es": "Diosa Súper Verde",
+        "en": "Super Green Goddess"
+      },
       "description": {
         "es": "Col rizada rallada, espinaca bebé, camote, col rallada, brócoli picante, almendras tostadas, garbanzos, zanahorias crudas, aderezo ranch",
         "en": "Shredded kale, baby spinach, sweet potato, shredded cabbage, spicy broccoli, roasted almonds, chickpeas, raw carrots, ranch dressing"
@@ -190,12 +310,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440041",
       "slug": "jardin-cobb",
       "category": "ensaladas",
-      "image": "menu/SG_Web_Image_Bowl_Garden_Cobb.png",
+      "image": null,
       "price": 695,
-      "nutrition": { "calories": 745, "protein": 22, "fat": 56, "carbs": 36 },
+      "nutrition": {
+        "calories": 745,
+        "protein": 22,
+        "fat": 56,
+        "carbs": 36
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Jardín Cobb", "en": "Garden Cobb" },
+      "name": {
+        "es": "Jardín Cobb",
+        "en": "Garden Cobb"
+      },
       "description": {
         "es": "Lechuga romana picada, mezcla de lechuga, camote, almendras tostadas, tomates, aguacate, huevo duro, queso azul, vinagreta balsámica",
         "en": "Chopped romaine, mixed greens, sweet potato, roasted almonds, tomatoes, avocado, hard-boiled egg, blue cheese, balsamic vinaigrette"
@@ -205,12 +333,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440042",
       "slug": "pollo-picante-con-miel",
       "category": "proteinas",
-      "image": "menu/Hot_Honey_Chicken.png",
+      "image": null,
       "price": 875,
-      "nutrition": { "calories": 835, "protein": 43, "fat": 39, "carbs": 75 },
+      "nutrition": {
+        "calories": 835,
+        "protein": 43,
+        "fat": 39,
+        "carbs": 75
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Pollo Picante con Miel", "en": "Hot Honey Chicken" },
+      "name": {
+        "es": "Pollo Picante con Miel",
+        "en": "Hot Honey Chicken"
+      },
       "description": {
         "es": "Quinoa con hierbas, cebollas crujientes, pollo ennegrecido, camote, ensalada de verduras, salsa de mostaza con miel picante",
         "en": "Herbed quinoa, crispy onions, blackened chicken, sweet potato, green slaw, hot honey mustard sauce"
@@ -220,12 +356,20 @@
       "id": "550e8400-e29b-41d4-a716-446655440043",
       "slug": "te-de-jamaica",
       "category": "bebidas",
-      "image": "menu/Agua-de-Jamaica-Drink.jpg",
+      "image": null,
       "price": 125,
-      "nutrition": { "calories": 0, "protein": 0, "fat": 0, "carbs": 0 },
+      "nutrition": {
+        "calories": 0,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 0
+      },
       "available": true,
       "hidden": false,
-      "name": { "es": "Té de Jamaica", "en": "Hibiscus Iced Tea" },
+      "name": {
+        "es": "Té de Jamaica",
+        "en": "Hibiscus Iced Tea"
+      },
       "description": {
         "es": "Infusión de flores de jamaica, endulzada al gusto",
         "en": "Hibiscus flower infusion, sweetened to taste"

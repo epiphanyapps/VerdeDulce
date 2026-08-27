@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getMenuSections } from "@/content/menu";
 import type { Locale } from "@/i18n/routing";
-import { siteConfig } from "@/lib/config";
+import { whatsappOrderUrl } from "@/lib/config";
 import { MenuGrid } from "@/components/MenuGrid";
 import { CTAAnchor, CTALink, ArrowIcon } from "@/components/CTALink";
 
@@ -14,6 +14,7 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const t = await getTranslations("home");
+  const tMenu = await getTranslations("menu");
   const sections = getMenuSections();
 
   return (
@@ -24,7 +25,7 @@ export default async function HomePage({
         </h1>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <CTAAnchor href={siteConfig.whatsapp.catalogUrl}>
+          <CTAAnchor href={whatsappOrderUrl(tMenu("orderMessage"))}>
             {t("orderNow")}
             <ArrowIcon />
           </CTAAnchor>

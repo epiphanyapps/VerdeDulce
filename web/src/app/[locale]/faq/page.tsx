@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import faq from "@/content/faq.json";
 import type { Locale } from "@/i18n/routing";
-import { siteConfig } from "@/lib/config";
+import { whatsappOrderUrl } from "@/lib/config";
 import { CTAAnchor, ArrowIcon } from "@/components/CTALink";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -42,6 +42,7 @@ export default async function FaqPage({
 
   const t = await getTranslations("faq");
   const tHome = await getTranslations("home");
+  const tMenu = await getTranslations("menu");
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
@@ -72,7 +73,7 @@ export default async function FaqPage({
       </div>
 
       <div className="mt-12">
-        <CTAAnchor href={siteConfig.whatsapp.catalogUrl}>
+        <CTAAnchor href={whatsappOrderUrl(tMenu("orderMessage"))}>
           {tHome("orderNow")}
           <ArrowIcon />
         </CTAAnchor>

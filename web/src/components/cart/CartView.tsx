@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import { formatPrice } from "@/lib/format";
 import { siteConfig, whatsappOrderUrl } from "@/lib/config";
+import { MenuImage } from "../MenuImage";
 import { useCart, type ResolvedLine } from "./CartProvider";
 
 function QuantityStepper({ line }: { line: ResolvedLine }) {
@@ -84,12 +84,10 @@ export function CartView() {
         {lines.map((line) => (
           <li key={line.item.slug} className="flex gap-4 py-5">
             <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-surface-muted sm:size-24">
-              <Image
-                src={line.item.image}
-                alt=""
-                fill
+              <MenuImage
+                item={line.item}
+                locale={locale}
                 sizes="96px"
-                className="object-cover"
               />
             </div>
 

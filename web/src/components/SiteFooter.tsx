@@ -1,7 +1,7 @@
 import QRCode from "qrcode";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
-import { siteConfig } from "@/lib/config";
+import { siteConfig, whatsappOrderUrl } from "@/lib/config";
 import { Marquee } from "./Marquee";
 
 /**
@@ -21,14 +21,15 @@ async function qrSvg(value: string): Promise<string> {
 export async function SiteFooter() {
   const t = await getTranslations("footer");
   const tNav = await getTranslations("nav");
-  const qr = await qrSvg(siteConfig.whatsapp.catalogUrl);
+  const orderUrl = whatsappOrderUrl((await getTranslations("menu"))("orderMessage"));
+  const qr = await qrSvg(orderUrl);
   // Evaluated at build time, so the copyright year tracks each deploy.
   const year = new Date().getFullYear();
 
   return (
     <footer className="mt-24 bg-sage text-kale">
       <a
-        href={siteConfig.whatsapp.catalogUrl}
+        href={orderUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="block hover:underline"
@@ -94,7 +95,7 @@ export async function SiteFooter() {
 
         <div className="sm:col-span-2 lg:col-span-1 lg:justify-self-end">
           <a
-            href={siteConfig.whatsapp.catalogUrl}
+            href={orderUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block text-center"

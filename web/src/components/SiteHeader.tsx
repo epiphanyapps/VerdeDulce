@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
-import { siteConfig } from "@/lib/config";
+import { whatsappOrderUrl } from "@/lib/config";
 import { CTAAnchor, ArrowIcon } from "./CTALink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CartLink } from "./cart/CartLink";
@@ -18,6 +18,7 @@ const NAV = [
 export function SiteHeader() {
   const t = useTranslations("nav");
   const tHome = useTranslations("home");
+  const tMenu = useTranslations("menu");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -87,7 +88,7 @@ export function SiteHeader() {
             {t("account")}
           </Link>
           <CTAAnchor
-            href={siteConfig.whatsapp.catalogUrl}
+            href={whatsappOrderUrl(tMenu("orderMessage"))}
             className="hidden px-4 py-2 text-sm sm:inline-flex"
           >
             {tHome("orderNow")}
@@ -145,7 +146,7 @@ export function SiteHeader() {
           <div className="flex items-center justify-between gap-4 px-4 pb-4 sm:px-6">
             <LanguageSwitcher />
             <CTAAnchor
-              href={siteConfig.whatsapp.catalogUrl}
+              href={whatsappOrderUrl(tMenu("orderMessage"))}
               className="px-4 py-2 text-sm"
             >
               {tHome("orderNow")}

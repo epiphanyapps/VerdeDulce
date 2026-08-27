@@ -10,6 +10,12 @@ export const siteConfig = {
   whatsapp: {
     /** E.164, no `+`, as wa.me expects. */
     phone: "593963021783",
+    /**
+     * The old catalog link (`wa.me/c/<phone>`) now 404s — the WhatsApp
+     * Business catalog behind it is gone. Every order CTA goes through
+     * `whatsappOrderUrl` instead, which opens a chat with the message
+     * prefilled and is verified working.
+     */
     catalogUrl: "https://wa.me/c/593963021783",
   },
   social: {

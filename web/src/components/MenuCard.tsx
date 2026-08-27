@@ -1,10 +1,10 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import type { MenuItem } from "@/content/menu";
 import { formatPrice } from "@/lib/format";
 import { NutritionBullets } from "./NutritionBullets";
+import { MenuImage } from "./MenuImage";
 
 /**
  * `sizes` must mirror MenuGrid's column counts, otherwise the browser
@@ -36,13 +36,12 @@ export function MenuCard({
         className="flex h-full flex-col rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-forest"
       >
         <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-surface-muted">
-          <Image
-            src={item.image}
-            alt=""
-            fill
+          <MenuImage
+            item={item}
+            locale={locale}
             sizes={CARD_SIZES}
             priority={priority}
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         </div>
 

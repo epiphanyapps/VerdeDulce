@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/pageMetadata";
 import { PageShell } from "@/components/PageShell";
 import { CTAAnchor, ArrowIcon } from "@/components/CTALink";
-import { siteConfig } from "@/lib/config";
+import { whatsappOrderUrl } from "@/lib/config";
 
 export async function generateMetadata({
   params,
@@ -23,12 +23,13 @@ export default async function GiftPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("gift");
+  const tMenu = await getTranslations("menu");
 
   return (
     <PageShell title={t("title")} subtitle={t("subtitle")}>
       <p className="mt-8 text-on-surface-dim">{t("notify")}</p>
       <div className="mt-8">
-        <CTAAnchor href={siteConfig.whatsapp.catalogUrl}>
+        <CTAAnchor href={whatsappOrderUrl(tMenu("orderMessage"))}>
           WhatsApp
           <ArrowIcon />
         </CTAAnchor>

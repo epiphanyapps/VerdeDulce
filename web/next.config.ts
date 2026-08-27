@@ -11,15 +11,10 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: {
-    // Menu photography is already resized and cached by the Serverless Image
-    // Handler in front of the S3 bucket. A custom loader points next/image at
-    // it, which keeps srcSet, sizes and lazy-loading working under a static
-    // export instead of falling back to `unoptimized`.
-    loader: "custom",
-    loaderFile: "./src/lib/imageLoader.ts",
-    // Candidate widths Next may request from the handler.
-    imageSizes: [200, 320, 420],
-    deviceSizes: [480, 640, 828, 1080, 1200, 1920],
+    // Menu photography is committed under public/ at display size. The
+    // Serverless Image Handler this used to point at was deleted along with
+    // its S3 bucket, and a static export has no optimizer of its own.
+    unoptimized: true,
   },
   // The Expo app above still has its own lockfile; pin the trace root to
   // this directory so Next does not infer the parent as the workspace root.

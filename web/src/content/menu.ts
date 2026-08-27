@@ -12,8 +12,11 @@ export type MenuItem = {
   id: string;
   slug: string;
   category: string;
-  /** S3 key, resolved through the image CDN by `imageCDNURL`. */
-  image: string;
+  /**
+   * Path under `public/`, or null when we have no photo for this dish yet
+   * (MenuImage renders a branded placeholder in that case).
+   */
+  image: string | null;
   /** Cents. */
   price: number;
   nutrition: {

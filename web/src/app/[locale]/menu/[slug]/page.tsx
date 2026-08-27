@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getMenuItem, getRelatedItems, getCategory, menuItems } from "@/content/menu";
 import { Link, routing, type Locale } from "@/i18n/routing";
 import { formatPrice } from "@/lib/format";
-import { imageCDNURL } from "@/lib/image";
 import { siteConfig, whatsappOrderUrl } from "@/lib/config";
 import { CTAAnchor, ArrowIcon } from "@/components/CTALink";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { NutritionBullets } from "@/components/NutritionBullets";
 import { MenuCard } from "@/components/MenuCard";
+import { MenuImage } from "@/components/MenuImage";
 import { JsonLd } from "@/components/JsonLd";
 
 /** One static page per visible item, per locale. */
@@ -31,7 +30,7 @@ export async function generateMetadata({
 
   const name = item.name[locale];
   const description = item.description[locale];
-  const image = imageCDNURL({ key: item.image, width: 1200 });
+  const image = item.image ? `${siteConfig.url}${item.image}` : undefined;
 
   return {
     title: name,
@@ -47,14 +46,14 @@ export async function generateMetadata({
     openGraph: {
       title: name,
       description,
-      images: [{ url: image, width: 1200, height: 1200, alt: name }],
+      images: image ? [{ url: image, alt: name }] : undefined,
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: name,
       description,
-      images: [image],
+      images: image ? [image] : undefined,
     },
   };
 }
@@ -93,13 +92,11 @@ export default async function MenuItemPage({
 
       <article className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-surface-muted">
-          <Image
-            src={item.image}
-            alt={name}
-            fill
+          <MenuImage
+            item={item}
+            locale={locale}
             sizes="(min-width: 64rem) 42rem, 92vw"
             priority
-            className="object-cover"
           />
         </div>
 
@@ -175,7 +172,7 @@ export default async function MenuItemPage({
           "@type": "MenuItem",
           name,
           description,
-          image: imageCDNURL({ key: item.image, width: 1200 }),
+          ...(item.image ? { image: `${siteConfig.url}${item.image}` } : {}),
           url: `${siteConfig.url}/${locale}/menu/${item.slug}`,
           offers: {
             "@type": "Offer",
