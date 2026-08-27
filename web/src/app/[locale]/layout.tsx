@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -23,6 +23,14 @@ const openSans = Open_Sans({
   variable: "--font-open-sans",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f1e4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b3e35" },
+  ],
+  colorScheme: "light",
+};
 
 /** Enumerates `/es` and `/en` so both trees are emitted by the static export. */
 export function generateStaticParams() {
@@ -57,8 +65,15 @@ export async function generateMetadata({
       type: "website",
       siteName: t("siteName"),
       locale: locale === "es" ? "es_EC" : "en_US",
+      alternateLocale: locale === "es" ? ["en_US"] : ["es_EC"],
       url: `/${locale}`,
     },
+    twitter: {
+      card: "summary_large_image",
+    },
+    // Surfaced by Google as the site name in results rather than the domain.
+    applicationName: t("siteName"),
+    category: "restaurant",
     robots: { index: true, follow: true },
   };
 }
@@ -102,8 +117,15 @@ export default async function LocaleLayout({
           data={{
             "@context": "https://schema.org",
             "@type": "Restaurant",
+            "@id": `${siteConfig.url}/#restaurant`,
             name: siteConfig.name,
             url: `${siteConfig.url}/${locale}`,
+            image: `${siteConfig.url}/icon.png`,
+            hasMenu: `${siteConfig.url}/${locale}/menu/`,
+            // Stated on the FAQ page; repeated here so search engines can read it.
+            paymentAccepted: locale === "es" ? "Efectivo, transferencia bancaria" : "Cash, bank transfer",
+            currenciesAccepted: "USD",
+            areaServed: ["Portoviejo", "12 de Marzo", "18 de Octubre", "Andrés de Vera"],
             servesCuisine: locale === "es" ? "Saludable" : "Healthy",
             priceRange: "$",
             email: siteConfig.contactEmail,

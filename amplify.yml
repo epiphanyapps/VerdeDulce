@@ -52,3 +52,20 @@ applications:
         paths:
           - node_modules/**/*
           - .next/cache/**/*
+
+# Next emits the generated Open Graph cards as extensionless files
+# (e.g. /es/menu/tazon-de-cosecha/opengraph-image). Amplify infers Content-Type
+# from the file extension, so without this they are served as
+# application/octet-stream and every social scraper rejects them — no preview
+# image on WhatsApp, Facebook, or Instagram.
+customHeaders:
+  - pattern: "**/opengraph-image"
+    headers:
+      - key: Content-Type
+        value: image/png
+      - key: Cache-Control
+        value: "public, max-age=0, must-revalidate"
+  - pattern: "/_next/static/**"
+    headers:
+      - key: Cache-Control
+        value: "public, max-age=31536000, immutable"
