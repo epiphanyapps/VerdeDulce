@@ -47,11 +47,13 @@ export function MenuImage({
       role="img"
       aria-label={name}
       className="flex size-full items-center justify-center p-6"
-      style={{ backgroundColor: `hsl(${70 + hue} 24% 88%)` }}
+      // Lightness stays high enough that forest/85 text clears 4.5:1 on every
+      // hue in the range; axe checks this in e2e/a11y.spec.ts.
+      style={{ backgroundColor: `hsl(${70 + hue} 24% 90%)` }}
     >
       <span
         aria-hidden="true"
-        className="text-center font-display text-lg font-light leading-snug text-forest/60"
+        className="text-center font-display text-lg font-light leading-snug text-forest/85"
       >
         {name}
       </span>

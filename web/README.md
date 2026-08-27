@@ -64,5 +64,53 @@ Cognito group), but copy, price, and nutrition ship with the build.
 ```bash
 pnpm typecheck
 pnpm lint
-pnpm build
+pnpm build          # never `next build` on its own — see below
+pnpm test:e2e
 ```
+
+**Always build with `pnpm build`.** It chains two steps that `next build`
+alone skips: copying `amplify_outputs.json` into the module graph, and writing
+the `.png` siblings of the generated Open Graph cards. Skipping the first bakes
+stale Cognito ids into the bundle; skipping the second leaves every social card
+unreachable. `e2e/config.spec.ts` fails loudly if the first has gone stale.
+
+## End-to-end tests
+
+Playwright drives the built static export — the same artifact Amplify deploys —
+across Chromium, WebKit, Firefox and an iPhone viewport.
+
+```bash
+pnpm test:e2e                    # everything
+pnpm test:e2e --project=chromium # one engine
+pnpm test:e2e:ui                 # interactive
+```
+
+Auth specs need a Cognito test user:
+
+```bash
+E2E_PASSWORD=... pnpm test:e2e auth
+```
+
+Without it they degrade to asserting the signed-out surface rather than
+failing. Two accounts exist for this: `e2e-user@verdedulce.com` and
+`e2e-admin@verdedulce.com` (in the `ADMINS` group). The password is a repo
+secret, `E2E_PASSWORD`.
+
+Set `BASE_URL` to run the same specs against a deployed origin:
+
+```bash
+BASE_URL=https://verdedulce.com pnpm test:e2e routes
+```
+
+Two engine-specific notes, both harness limitations rather than product bugs:
+
+- **Signed-in auth is skipped on WebKit over plain http.** Amplify stores
+  tokens in `Secure` cookies, which Safari drops on an insecure origin. It
+  works over https — the post-deploy smoke job covers it.
+- **Safari does not tab to links** unless "Press Tab to highlight each item" is
+  enabled, so the keyboard skip-link test is Chromium/Firefox only. The link's
+  presence and target are still asserted everywhere.
+
+Visual snapshots are excluded from CI until Linux baselines are committed;
+generate them in the Playwright container, since macOS baselines will never
+match a CI runner.

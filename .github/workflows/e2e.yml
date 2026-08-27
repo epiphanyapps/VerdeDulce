@@ -1,0 +1,104 @@
+name: e2e
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # pnpm 11 imports node:sqlite, so Node 22 is a hard floor. Keep this
+          # in step with amplify.yml.
+          node-version: 22
+
+      - name: Install pnpm
+        run: npm install -g pnpm@11.9.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('web/pnpm-lock.yaml') }}
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium webkit firefox
+
+      - name: Build
+        # `pnpm build`, never `next build` — the former chains the
+        # amplify_outputs sync and the Open Graph .png step.
+        run: pnpm build
+
+      - name: Run E2E tests
+        # Visual snapshots are excluded until Linux baselines are committed:
+        # they are platform-specific, and macOS baselines will never match a CI
+        # container. Generate them with the Playwright container and drop the
+        # grep-invert to enable:
+        #   docker run --rm -v $PWD:/w -w /w mcr.microsoft.com/playwright:v1.62.1-noble \
+        #     npx playwright test visual --update-snapshots
+        run: pnpm exec playwright test --grep-invert visual
+        env:
+          # Absent on forks; the auth suite degrades to signed-out coverage
+          # rather than failing.
+          E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: web/playwright-report/
+          retention-days: 14
+
+  # Infrastructure-level breakage — redirect rules, MIME types, soft 404s —
+  # lives in Amplify console state rather than in this repo, so it can only be
+  # caught against the deployed site.
+  smoke:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: test
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install -g pnpm@11.9.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium webkit
+
+      # routes.spec.ts enumerates URLs from out/sitemap.xml, so the export has
+      # to exist locally even though the assertions run against the live site.
+      - name: Build (for route enumeration)
+        run: pnpm build
+
+      - name: Wait for the Amplify deploy to land
+        run: sleep 180
+
+      - name: Smoke the live site
+        run: pnpm exec playwright test routes i18n auth --project=chromium --project=webkit
+        env:
+          BASE_URL: https://main.d2eocpcmr90v03.amplifyapp.com
+          E2E_PASSWORD: ${{ secrets.E2E_PASSWORD }}
