@@ -34,14 +34,18 @@ applications:
       phases:
         preBuild:
           commands:
-            - nvm use 20
-            # Installed directly rather than through corepack: the corepack
-            # bundled with Amplify's Node 20 image is too old to launch pnpm 11
-            # — it loads pnpm.cjs through vm with no dynamic-import callback and
-            # dies with ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING before running.
-            # Going via npm removes that version coupling entirely.
+            # Node 22, not 20: pnpm 11 requires >=22.13 because it imports
+            # node:sqlite, which Node 20 does not have. On Node 20 it fails with
+            # ERR_UNKNOWN_BUILTIN_MODULE, and the image's bundled corepack is
+            # itself too old to launch pnpm 11 at all. `nvm install` is a no-op
+            # when the image already carries the version.
+            - nvm install 22 && nvm use 22
+            # Installed from npm rather than corepack, so the pnpm version is
+            # pinned here instead of being tied to whatever corepack ships.
             - npm install -g pnpm@11.9.0
-            - pnpm --version
+            # Echoed so a future engine mismatch shows up as a version line
+            # rather than a stack trace from inside pnpm.
+            - node --version && pnpm --version
             - pnpm install --frozen-lockfile
         build:
           commands:
