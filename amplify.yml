@@ -35,8 +35,13 @@ applications:
         preBuild:
           commands:
             - nvm use 20
-            - corepack enable
-            - corepack prepare pnpm@11.9.0 --activate
+            # Installed directly rather than through corepack: the corepack
+            # bundled with Amplify's Node 20 image is too old to launch pnpm 11
+            # — it loads pnpm.cjs through vm with no dynamic-import callback and
+            # dies with ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING before running.
+            # Going via npm removes that version coupling entirely.
+            - npm install -g pnpm@11.9.0
+            - pnpm --version
             - pnpm install --frozen-lockfile
         build:
           commands:
