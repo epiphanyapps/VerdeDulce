@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "siteName": "Verde Dulce",
+    "home": {
+      "title": "Verde Dulce — Comida fresca y de alta calidad, de origen local",
+      "description": "Ensaladas, tazones de granos y platos de temporada hechos con ingredientes locales. Pide por WhatsApp con entrega en Portoviejo."
+    },
+    "menu": {
+      "title": "Menú",
+      "description": "Explora el menú completo de Verde Dulce: tazones, ensaladas, platos de proteínas y bebidas, con información nutricional de cada plato."
+    },
+    "faq": { "title": "Preguntas frecuentes", "description": "Horarios, entregas, métodos de pago y catering en Verde Dulce." },
+    "loyalty": { "title": "Lealtad", "description": "Acumula 9 ensaladas y la décima es gratis." },
+    "gift": { "title": "Tarjetas de regalo", "description": "Regala Verde Dulce." },
+    "account": { "title": "Mi cuenta", "description": "Administra tu cuenta de Verde Dulce." },
+    "settings": { "title": "Ajustes", "description": "Preferencias de tu cuenta." },
+    "login": { "title": "Iniciar sesión", "description": "Accede a tu cuenta de Verde Dulce." },
+    "cart": { "title": "Tu pedido", "description": "Revisa tu pedido antes de enviarlo por WhatsApp." },
+    "admin": { "title": "Administración", "description": "Gestión del menú." }
+  },
+  "nav": {
+    "brand": "Verde Dulce",
+    "home": "Inicio",
+    "menu": "Menú",
+    "faq": "Preguntas frecuentes",
+    "loyalty": "Lealtad",
+    "gift": "Regalo",
+    "account": "Cuenta",
+    "settings": "Ajustes",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "cart": "Pedido",
+    "admin": "Administración",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación",
+    "skipToContent": "Saltar al contenido"
+  },
+  "home": {
+    "tagline": "Comida fresca y de alta calidad. De origen local.",
+    "orderNow": "Ordena",
+    "viewMenu": "Ver el menú",
+    "comingSoon": "¡Próximamente!"
+  },
+  "menu": {
+    "title": "Menú",
+    "intro": "Cada plato se prepara al momento con ingredientes de granjas locales.",
+    "orderMessage": "Hola, me gustaría hacer un pedido con Verde Dulce.",
+    "orderItemMessage": "Hola, me gustaría ordenar {item} de Verde Dulce.",
+    "orderOnWhatsapp": "Ordenar por WhatsApp",
+    "viewItem": "Ver {item}",
+    "backToMenu": "Volver al menú",
+    "relatedTitle": "También te puede gustar",
+    "jumpTo": "Ir a la categoría",
+    "empty": "No hay platos disponibles en este momento."
+  },
+  "nutrition": {
+    "calories": "Calorías",
+    "carbs": "Carbohidratos",
+    "protein": "Proteína",
+    "fat": "Grasa",
+    "shortCalories": "CAL",
+    "perServing": "Por porción",
+    "grams": "{value} g"
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "intro": "Lo que más nos preguntan. Si no encuentras tu respuesta, escríbenos por WhatsApp."
+  },
+  "loyalty": {
+    "title": "Programa de lealtad",
+    "subtitle": "Acumula 9 ensaladas y la décima es gratis.",
+    "signedOut": "Inicia sesión para ver tus puntos."
+  },
+  "gift": {
+    "title": "Tarjetas de regalo",
+    "subtitle": "Muy pronto vas a poder regalar Verde Dulce.",
+    "notify": "Escríbenos por WhatsApp y te avisamos cuando estén listas."
+  },
+  "account": {
+    "title": "Mi cuenta",
+    "email": "Correo electrónico",
+    "signedOut": "No has iniciado sesión.",
+    "signOut": "Cerrar sesión"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "cart": {
+    "title": "Tu pedido",
+    "empty": "Tu pedido está vacío.",
+    "browseMenu": "Explorar el menú",
+    "add": "Agregar al pedido",
+    "remove": "Quitar",
+    "quantity": "Cantidad",
+    "increase": "Agregar uno más",
+    "decrease": "Quitar uno",
+    "total": "Total",
+    "checkout": "Enviar pedido por WhatsApp",
+    "orderIntro": "Hola, me gustaría hacer este pedido con Verde Dulce:",
+    "itemCount": "{count, plural, =0 {Sin artículos} one {# artículo} other {# artículos}}"
+  },
+  "admin": {
+    "title": "Administración",
+    "subtitle": "Gestión del menú.",
+    "restricted": "Necesitas permisos de administrador para ver esta página."
+  },
+  "auth": {
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "loading": "Cargando…"
+  },
+  "footer": {
+    "marquee": "Presentamos el Bistec con Ajo Caramelizado. Pruébalo hoy en uno de nuestros tres nuevos platos del menú.",
+    "social": "Síguenos",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "scanToOrder": "Escanea para ordenar por WhatsApp",
+    "hours": "Lunes a viernes, 11:00–19:00",
+    "delivery": "Entrega a domicilio en Portoviejo",
+    "rights": "© {year} Verde Dulce. Todos los derechos reservados."
+  },
+  "language": {
+    "label": "Idioma",
+    "es": "Español",
+    "en": "English"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe o cambió de dirección.",
+    "backHome": "Volver al inicio"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "error": "Algo salió mal.",
+    "retry": "Intentar de nuevo"
+  }
+}

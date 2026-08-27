@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "siteName": "Verde Dulce",
+    "home": {
+      "title": "Verde Dulce — Fresh, high-quality, locally sourced food",
+      "description": "Salads, grain bowls, and seasonal plates made with local ingredients. Order over WhatsApp with delivery in Portoviejo."
+    },
+    "menu": {
+      "title": "Menu",
+      "description": "Browse the full Verde Dulce menu: bowls, salads, protein plates, and drinks, with nutrition information for every dish."
+    },
+    "faq": { "title": "Frequently asked questions", "description": "Hours, delivery, payment methods, and catering at Verde Dulce." },
+    "loyalty": { "title": "Loyalty", "description": "Buy nine salads and the tenth is free." },
+    "gift": { "title": "Gift cards", "description": "Give Verde Dulce." },
+    "account": { "title": "My account", "description": "Manage your Verde Dulce account." },
+    "settings": { "title": "Settings", "description": "Your account preferences." },
+    "login": { "title": "Sign in", "description": "Sign in to your Verde Dulce account." },
+    "cart": { "title": "Your order", "description": "Review your order before sending it over WhatsApp." },
+    "admin": { "title": "Admin", "description": "Menu management." }
+  },
+  "nav": {
+    "brand": "Verde Dulce",
+    "home": "Home",
+    "menu": "Menu",
+    "faq": "FAQ",
+    "loyalty": "Loyalty",
+    "gift": "Gift",
+    "account": "Account",
+    "settings": "Settings",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "cart": "Order",
+    "admin": "Admin",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "skipToContent": "Skip to content"
+  },
+  "home": {
+    "tagline": "Fresh, high-quality food. Locally sourced.",
+    "orderNow": "Order",
+    "viewMenu": "See the menu",
+    "comingSoon": "Coming soon!"
+  },
+  "menu": {
+    "title": "Menu",
+    "intro": "Every dish is made to order with ingredients from local farms.",
+    "orderMessage": "Hi, I would like to place an order with Verde Dulce.",
+    "orderItemMessage": "Hi, I would like to order the {item} from Verde Dulce.",
+    "orderOnWhatsapp": "Order on WhatsApp",
+    "viewItem": "View {item}",
+    "backToMenu": "Back to the menu",
+    "relatedTitle": "You might also like",
+    "jumpTo": "Jump to category",
+    "empty": "No dishes are available right now."
+  },
+  "nutrition": {
+    "calories": "Calories",
+    "carbs": "Carbs",
+    "protein": "Protein",
+    "fat": "Fat",
+    "shortCalories": "CAL",
+    "perServing": "Per serving",
+    "grams": "{value} g"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "intro": "The things people ask us most. If your answer isn't here, message us on WhatsApp."
+  },
+  "loyalty": {
+    "title": "Loyalty program",
+    "subtitle": "Buy nine salads and the tenth is free.",
+    "signedOut": "Sign in to see your points."
+  },
+  "gift": {
+    "title": "Gift cards",
+    "subtitle": "Gift cards are coming soon.",
+    "notify": "Message us on WhatsApp and we'll let you know when they're ready."
+  },
+  "account": {
+    "title": "My account",
+    "email": "Email",
+    "signedOut": "You are not signed in.",
+    "signOut": "Sign out"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "cart": {
+    "title": "Your order",
+    "empty": "Your order is empty.",
+    "browseMenu": "Browse the menu",
+    "add": "Add to order",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "increase": "Add one more",
+    "decrease": "Remove one",
+    "total": "Total",
+    "checkout": "Send order on WhatsApp",
+    "orderIntro": "Hi, I would like to place this order with Verde Dulce:",
+    "itemCount": "{count, plural, =0 {No items} one {# item} other {# items}}"
+  },
+  "admin": {
+    "title": "Admin",
+    "subtitle": "Menu management.",
+    "restricted": "You need administrator access to view this page."
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "loading": "Loading…"
+  },
+  "footer": {
+    "marquee": "Introducing the Caramelized Garlic Steak. Try it today in one of three new dishes on the menu.",
+    "social": "Follow us",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "scanToOrder": "Scan to order on WhatsApp",
+    "hours": "Monday to Friday, 11:00–19:00",
+    "delivery": "Delivery in Portoviejo",
+    "rights": "© {year} Verde Dulce. All rights reserved."
+  },
+  "language": {
+    "label": "Language",
+    "es": "Español",
+    "en": "English"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has moved.",
+    "backHome": "Back to home"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "retry": "Try again"
+  }
+}

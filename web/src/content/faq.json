@@ -1,0 +1,101 @@
+[
+  {
+    "id": "que-es",
+    "question": {
+      "es": "¿Qué es Verde Dulce?",
+      "en": "What is Verde Dulce?"
+    },
+    "answer": {
+      "es": "Verde Dulce es un restaurante de comida rápida y saludable que se enfoca en comidas frescas, nutritivas y sostenibles. Nos especializamos en ensaladas personalizables, bowls de granos y platos de temporada, elaborados con ingredientes locales para ofrecerte opciones saludables y sabrosas.",
+      "en": "Verde Dulce is a healthy fast-casual restaurant focused on fresh, nutritious, sustainable food. We specialize in customizable salads, grain bowls, and seasonal plates made with locally sourced ingredients."
+    }
+  },
+  {
+    "id": "pagos",
+    "question": {
+      "es": "¿Cuáles son los métodos de pago?",
+      "en": "What payment methods do you accept?"
+    },
+    "answer": {
+      "es": "Aceptamos efectivo y transferencia por Banco Pichincha.",
+      "en": "We accept cash and bank transfer through Banco Pichincha."
+    }
+  },
+  {
+    "id": "como-pedir",
+    "question": {
+      "es": "¿Cómo puedo hacer un pedido?",
+      "en": "How do I place an order?"
+    },
+    "answer": {
+      "es": "Puedes pedir a través de nuestro sitio web en verdedulce.com. Haz clic en el botón de ordenar y gestiona tu pedido por WhatsApp.",
+      "en": "Order through our website at verdedulce.com. Tap the order button and complete your order over WhatsApp."
+    }
+  },
+  {
+    "id": "personalizar",
+    "question": {
+      "es": "¿Puedo personalizar mi pedido?",
+      "en": "Can I customize my order?"
+    },
+    "answer": {
+      "es": "¡Por supuesto! Puedes armar tu propio bowl o ensalada eligiendo entre una variedad de hojas verdes, granos, proteínas y toppings. También ofrecemos una selección de aderezos caseros para realzar tu comida.",
+      "en": "Absolutely. Build your own bowl or salad from a range of greens, grains, proteins, and toppings. We also make a selection of house dressings to finish it off."
+    }
+  },
+  {
+    "id": "nutricion",
+    "question": {
+      "es": "¿Cómo puedo ver la información nutricional de sus comidas?",
+      "en": "Where can I find nutrition information?"
+    },
+    "answer": {
+      "es": "Puedes ver información nutricional detallada de cada uno de nuestros platos en nuestro sitio web. Creemos en la transparencia, por lo que proporcionamos toda la información que necesitas para tomar decisiones informadas.",
+      "en": "Detailed nutrition information for every dish is on our website. We believe in transparency, so you have everything you need to make an informed choice."
+    }
+  },
+  {
+    "id": "catering",
+    "question": {
+      "es": "¿Ofrecen servicios de catering?",
+      "en": "Do you offer catering?"
+    },
+    "answer": {
+      "es": "Sí, Verde Dulce ofrece catering para eventos, reuniones y fiestas. Puedes elegir de nuestro menú o trabajar con nosotros para crear un menú personalizado que se adapte a las necesidades de tu evento.",
+      "en": "Yes. Verde Dulce caters events, meetings, and parties. Choose from our menu or work with us on a custom menu built around your event."
+    }
+  },
+  {
+    "id": "entrega",
+    "question": {
+      "es": "¿En qué áreas ofrecen entrega?",
+      "en": "Which areas do you deliver to?"
+    },
+    "answer": {
+      "es": "Hacemos servicio a domicilio en las parroquias 12 de Marzo, 18 de Octubre, Portoviejo y Andrés de Vera.",
+      "en": "We deliver to the 12 de Marzo, 18 de Octubre, Portoviejo, and Andrés de Vera parishes."
+    }
+  },
+  {
+    "id": "horarios",
+    "question": {
+      "es": "¿Cuáles son sus horarios de atención?",
+      "en": "What are your opening hours?"
+    },
+    "answer": {
+      "es": "Estamos abiertos de 11:00 AM a 7:00 PM, de lunes a viernes.",
+      "en": "We are open 11:00 AM to 7:00 PM, Monday through Friday."
+    }
+  },
+  {
+    "id": "contacto",
+    "question": {
+      "es": "¿Cómo puedo dejar un comentario o reportar un problema?",
+      "en": "How do I leave feedback or report a problem?"
+    },
+    "answer": {
+      "es": "¡Valoramos tus comentarios! Puedes escribirnos por WhatsApp o enviarnos un correo electrónico a contact@verdedulce.com. Siempre estamos buscando formas de mejorar tu experiencia.",
+      "en": "We value your feedback. Message us on WhatsApp or email contact@verdedulce.com. We are always looking for ways to improve your experience."
+    }
+  }
+]
