@@ -2,14 +2,15 @@
 packages:
   - "."
 
+# pnpm 11 requires every dependency with a install/build script to be
+# explicitly allowed or denied; leaving one unanswered makes `pnpm install`
+# exit non-zero, which would fail the Amplify build.
+#
+# All three are optional native addons with pure-JS or prebuilt fallbacks:
+# Next compiles with its own @next/swc-* binaries rather than @swc/core, and
+# @parcel/watcher only accelerates dev-mode file watching. Denying them keeps
+# CI from compiling native code it will never load.
 allowBuilds:
-  '@parcel/watcher': set this to true or false
-  '@swc/core': set this to true or false
-  unrs-resolver: set this to true or false
-
-# pnpm 11 reads build-script approval from here, not from package.json.
-# These three ship native binaries used by Next's compiler and file watcher.
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@swc/core"
-  - unrs-resolver
+  "@parcel/watcher": false
+  "@swc/core": false
+  unrs-resolver: false
