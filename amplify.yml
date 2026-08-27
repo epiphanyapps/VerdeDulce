@@ -24,16 +24,26 @@ applications:
       phases:
         build:
           commands:
-            # `appRoot` starts every command in web/; the backend lives one
-            # level up, alongside amplify/ and its own package.json.
-            - cd ..
-            - yarn install --frozen-lockfile
-            - cd amplify && yarn install --frozen-lockfile && cd ..
-            - yarn ampx pipeline-deploy --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID"
+            # `appRoot` starts every command in web/, but the backend lives one
+            # level up alongside amplify/. The whole phase runs in a subshell so
+            # that `cd ..` cannot leak: backend and frontend phases share one
+            # shell, and a leaked cwd sends the frontend's `pnpm install` to the
+            # repo root, where there is no pnpm-lock.yaml.
+            - |
+              (
+                set -e
+                cd ..
+                yarn install --frozen-lockfile
+                ( cd amplify && yarn install --frozen-lockfile )
+                yarn ampx pipeline-deploy --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID"
+              )
     frontend:
       phases:
         preBuild:
           commands:
+            # Fails loudly here rather than further down if the working
+            # directory is ever not the app root.
+            - pwd && test -f pnpm-lock.yaml
             # Node 22, not 20: pnpm 11 requires >=22.13 because it imports
             # node:sqlite, which Node 20 does not have. On Node 20 it fails with
             # ERR_UNKNOWN_BUILTIN_MODULE, and the image's bundled corepack is
