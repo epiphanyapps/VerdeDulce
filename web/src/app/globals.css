@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/**
+ * Design tokens ported from the React Native theme (`app/theme/colors.ts`,
+ * `spacing.ts`). The palette names are kept so the two can be diffed, but the
+ * spacing scale is dropped in favour of Tailwind's — the RN scale
+ * (2/4/8/12/16/24/32/48/64) is Tailwind's 0.5/1/2/3/4/6/8/12/16 exactly.
+ */
+@theme {
+  /* Brand palette */
+  --color-cream: #f2f1e4;
+  --color-kale: #0e150e;
+  --color-forest: #0b3e35;
+  --color-forest-hover: #135045;
+  --color-lime: #ebfe72;
+  --color-lime-bright: #e6ff55;
+  --color-sage: #d8e5d6;
+  --color-teal: #1b463c;
+
+  /* Neutrals */
+  --color-ink: #191015;
+  --color-ink-dim: #564e4a;
+  --color-line: #d7cec9;
+
+  /* Semantic aliases — prefer these in components */
+  --color-surface: var(--color-cream);
+  --color-surface-muted: #eae8d8;
+  --color-on-surface: var(--color-kale);
+  --color-on-surface-dim: #4a5a4a;
+  --color-accent: var(--color-forest);
+  --color-on-accent: var(--color-lime);
+  --color-border-subtle: #d5d3c0;
+
+  /* Type — loaded via next/font in the root layout */
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* Editorial heading sizes, matching the RN $sizeStyles ramp */
+  --text-display: 2.5rem;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.02em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Anchored category headings clear the sticky header. */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* A visible, on-brand focus ring everywhere rather than the UA default. */
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Footer ticker — the RN `Marquee` component, as two CSS-animated halves. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}

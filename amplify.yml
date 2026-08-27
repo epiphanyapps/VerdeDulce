@@ -1,37 +1,54 @@
+# Amplify Gen 2 monorepo build.
+#
+# The Gen 2 backend (auth / storage / analytics) stays at the repo root in
+# `amplify/`; the frontend is the Next.js app in `web/`, emitted as static
+# artifacts. Platform is WEB (not WEB_COMPUTE): `output: "export"` in
+# web/next.config.ts produces plain HTML/CSS/JS, so there is no Next.js server
+# runtime and no Amplify Next-version ceiling to track.
+#
+# Two redirects must be added in the Amplify console (Hosting -> Rewrites and
+# redirects), because a static export has no middleware to negotiate locale:
+#
+#   Source: /       Target: /es/        Type: 302 (Redirect - Temporary)
+#   Source: /<*>    Target: /404.html   Type: 404 (Rewrite)
+#
+# web/src/app/page.tsx is a client-side fallback if the first rule is missing.
+#
+# Package managers differ by phase on purpose: the repo root has yarn.lock
+# committed (the Expo app's), while web/ has its own pnpm-lock.yaml. Each phase
+# uses the manager whose lockfile is actually in git.
 version: 1
-backend:
-  phases:
-    build:
-      commands:
-        - yarn install --frozen-lockfile
-        - cd amplify
-        - yarn install --frozen-lockfile
-        - cd ..
-        - yarn ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - nvm use 20
-        # - npm install --silent --global expo-cli
-        - |-
-          if [ -f yarn.lock ]; then
-           yarn
-          elif [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-           npm ci --cache .npm --prefer-offline
-          else
-           npm install
-          fi
-    build:
-      commands:
-        # - mkdir ./dist && touch ./dist/index.html
-        # - 'npx expo build:web'
-        - 'yarn run bundle:web'
-  artifacts:
-    baseDirectory: dist
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
-      - $(npm root --global)/**/*
+applications:
+  - appRoot: web
+    backend:
+      phases:
+        build:
+          commands:
+            # `appRoot` starts every command in web/; the backend lives one
+            # level up, alongside amplify/ and its own package.json.
+            - cd ..
+            - yarn install --frozen-lockfile
+            - cd amplify && yarn install --frozen-lockfile && cd ..
+            - yarn ampx pipeline-deploy --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID"
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - nvm use 20
+            - corepack enable
+            - corepack prepare pnpm@11.9.0 --activate
+            - pnpm install --frozen-lockfile
+        build:
+          commands:
+            # Copies the root amplify_outputs.json (written by the backend
+            # phase) into the Next module graph, then exports to web/out.
+            - node scripts/sync-amplify-outputs.mjs
+            - pnpm exec next build
+      artifacts:
+        baseDirectory: out
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+          - .next/cache/**/*
