@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogImage } from "@/lib/pageMetadata";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import faq from "@/content/faq.json";
 import type { Locale } from "@/i18n/routing";
@@ -25,6 +26,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
+    openGraph: { images: ogImage(locale) },
     alternates: {
       canonical: `/${locale}/faq`,
       languages: { es: "/es/faq", en: "/en/faq", "x-default": "/es/faq" },

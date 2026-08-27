@@ -1,9 +1,25 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ogImage } from "@/lib/pageMetadata";
 import { getMenuSections } from "@/content/menu";
 import type { Locale } from "@/i18n/routing";
 import { whatsappOrderUrl } from "@/lib/config";
 import { MenuGrid } from "@/components/MenuGrid";
 import { CTAAnchor, CTALink, ArrowIcon } from "@/components/CTALink";
+
+/**
+ * Only declares the OG image: title, description and canonical are inherited
+ * from the locale layout, which is correct for the site root. The image has to
+ * be restated here because the file convention would otherwise win.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { openGraph: { images: ogImage(locale) } };
+}
 
 export default async function HomePage({
   params,

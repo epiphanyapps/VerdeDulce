@@ -10,7 +10,7 @@
     "predev": "node scripts/sync-amplify-outputs.mjs",
     "dev": "next dev",
     "prebuild": "node scripts/sync-amplify-outputs.mjs",
-    "build": "next build",
+    "build": "next build && node scripts/emit-og-png.mjs",
     "start": "next start",
     "lint": "eslint src",
     "typecheck": "node scripts/sync-amplify-outputs.mjs && tsc --noEmit"

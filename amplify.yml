@@ -63,6 +63,9 @@ applications:
             # phase) into the Next module graph, then exports to web/out.
             - node scripts/sync-amplify-outputs.mjs
             - pnpm exec next build
+            # Writes the .png siblings of the generated Open Graph cards; the
+            # extensionless originals are unreachable behind trailingSlash.
+            - node scripts/emit-og-png.mjs
       artifacts:
         baseDirectory: out
         files:

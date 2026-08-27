@@ -46,10 +46,18 @@ export async function generateMetadata({
       title: name,
       description,
       type: "article",
-      // og:image is left to the colocated opengraph-image.tsx, which renders a
-      // branded 1200x630 card for every dish — including the ones with no
-      // photograph. Setting `images` here would override that convention and
-      // leave those dishes with no preview image at all.
+      // The colocated opengraph-image.tsx renders a branded 1200x630 card for
+      // every dish, including those with no photograph. This points at the .png
+      // sibling written by scripts/emit-og-png.mjs — the bare convention URL is
+      // extensionless, which Amplify 301s into a 404.
+      images: [
+        {
+          url: `${siteConfig.url}/${locale}/menu/${slug}/opengraph-image.png`,
+          width: 1200,
+          height: 630,
+          alt: name,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",

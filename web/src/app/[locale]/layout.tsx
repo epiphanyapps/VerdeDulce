@@ -67,6 +67,17 @@ export async function generateMetadata({
       locale: locale === "es" ? "es_EC" : "en_US",
       alternateLocale: locale === "es" ? ["en_US"] : ["es_EC"],
       url: `/${locale}`,
+      // Explicit .png URL rather than the bare opengraph-image convention:
+      // scripts/emit-og-png.mjs writes that sibling, and the extension is what
+      // makes Amplify serve it as an image instead of 301-ing it into a 404.
+      images: [
+        {
+          url: `${siteConfig.url}/${locale}/opengraph-image.png`,
+          width: 1200,
+          height: 630,
+          alt: siteConfig.name,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
