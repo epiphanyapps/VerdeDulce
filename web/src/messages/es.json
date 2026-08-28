@@ -9,14 +9,38 @@
       "title": "Menú",
       "description": "Explora el menú completo de Verde Dulce: tazones, ensaladas, platos de proteínas y bebidas, con información nutricional de cada plato."
     },
-    "faq": { "title": "Preguntas frecuentes", "description": "Horarios, entregas, métodos de pago y catering en Verde Dulce." },
-    "loyalty": { "title": "Lealtad", "description": "Acumula 9 ensaladas y la décima es gratis." },
-    "gift": { "title": "Tarjetas de regalo", "description": "Regala Verde Dulce." },
-    "account": { "title": "Mi cuenta", "description": "Administra tu cuenta de Verde Dulce." },
-    "settings": { "title": "Ajustes", "description": "Preferencias de tu cuenta." },
-    "login": { "title": "Iniciar sesión", "description": "Accede a tu cuenta de Verde Dulce." },
-    "cart": { "title": "Tu pedido", "description": "Revisa tu pedido antes de enviarlo por WhatsApp." },
-    "admin": { "title": "Administración", "description": "Gestión del menú." }
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "description": "Horarios, entregas, métodos de pago y catering en Verde Dulce."
+    },
+    "loyalty": {
+      "title": "Lealtad",
+      "description": "Acumula 9 ensaladas y la décima es gratis."
+    },
+    "gift": {
+      "title": "Tarjetas de regalo",
+      "description": "Regala Verde Dulce."
+    },
+    "account": {
+      "title": "Mi cuenta",
+      "description": "Administra tu cuenta de Verde Dulce."
+    },
+    "settings": {
+      "title": "Ajustes",
+      "description": "Preferencias de tu cuenta."
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "description": "Accede a tu cuenta de Verde Dulce."
+    },
+    "cart": {
+      "title": "Tu pedido",
+      "description": "Revisa tu pedido antes de enviarlo por WhatsApp."
+    },
+    "admin": {
+      "title": "Administración",
+      "description": "Gestión del menú."
+    }
   },
   "nav": {
     "brand": "Verde Dulce",
@@ -105,7 +129,10 @@
   "admin": {
     "title": "Administración",
     "subtitle": "Gestión del menú.",
-    "restricted": "Necesitas permisos de administrador para ver esta página."
+    "restricted": "Necesitas permisos de administrador para ver esta página.",
+    "signedInAs": "Sesión iniciada como",
+    "uploads": "Subir fotos del menú",
+    "uploadsHint": "Las fotos van a menu-pictures/ en S3."
   },
   "auth": {
     "signIn": "Iniciar sesión",
@@ -136,5 +163,38 @@
     "loading": "Cargando…",
     "error": "Algo salió mal.",
     "retry": "Intentar de nuevo"
+  },
+  "kitchen": {
+    "title": "Guía de cocina",
+    "subtitle": "Todo lo que necesitas para operar el menú actual. Se genera del menú publicado, así que siempre coincide con lo que se vende.",
+    "print": "Imprimir",
+    "inDishes": "{count, plural, one {# plato} other {# platos}}",
+    "gaps": "Sin datos de cocina para: {list}. Agrégalos en kitchen.json o no aparecerán en la lista de compras.",
+    "derived": "Generado automáticamente del menú publicado: {count} preparaciones.",
+    "stats": {
+      "dishes": "Platos",
+      "components": "Preparaciones",
+      "sauces": "Salsas",
+      "singleUse": "De un solo uso"
+    },
+    "menu": {
+      "title": "El menú",
+      "hint": "Cada plato con sus preparaciones, en orden de armado."
+    },
+    "shopping": {
+      "title": "Lista de compras",
+      "hint": "Ordenada por cuántos platos dependen de cada insumo. Lo de arriba no puede faltar."
+    },
+    "prep": {
+      "title": "Prep del día",
+      "hint": "Agrupado por estación, no por plato."
+    },
+    "assembly": {
+      "title": "Orden de armado"
+    },
+    "portions": {
+      "title": "Porciones",
+      "hint": "Punto de partida. Ajustar con la práctica."
+    }
   }
 }

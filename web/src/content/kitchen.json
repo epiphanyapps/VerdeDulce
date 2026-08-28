@@ -1,0 +1,87 @@
+{
+  "stations": [
+    { "id": "horno",   "name": { "es": "Al horno",  "en": "Oven" },        "note": { "es": "Por tandas, al inicio del turno.", "en": "Batch at the start of service." } },
+    { "id": "plancha", "name": { "es": "A la plancha", "en": "Grill" },    "note": { "es": "Sazonar antes, reposar 5 min al salir.", "en": "Season ahead, rest 5 min off the heat." } },
+    { "id": "frio",    "name": { "es": "En frío",   "en": "Cold prep" },   "note": { "es": "Cortar al momento; no más de un turno adelantado.", "en": "Cut fresh; no more than one service ahead." } },
+    { "id": "tostado", "name": { "es": "Tostado",   "en": "Toasted" },     "note": { "es": "Enfriar antes de guardar o pierde el crocante.", "en": "Cool before storing or it loses its crunch." } },
+    { "id": "salsa",   "name": { "es": "Salsas",    "en": "Sauces" },      "note": { "es": "Preparar el día anterior. Agitar antes de usar.", "en": "Make the day before. Shake before use." } },
+    { "id": "montaje", "name": { "es": "Montaje",   "en": "Assembly" },    "note": { "es": "Se agrega al momento de armar el plato.", "en": "Added when the dish is built." } }
+  ],
+  "shoppingCategories": [
+    { "id": "verduras",  "name": { "es": "Verduras y frutas", "en": "Produce" } },
+    { "id": "proteinas", "name": { "es": "Proteínas",         "en": "Proteins" } },
+    { "id": "lacteos",   "name": { "es": "Lácteos",           "en": "Dairy" } },
+    { "id": "secos",     "name": { "es": "Secos y abarrotes", "en": "Dry goods" } },
+    { "id": "bebidas",   "name": { "es": "Bebidas",           "en": "Drinks" } }
+  ],
+  "components": {
+    "camote":                            { "station": "horno",   "shopping": "verduras",  "en": "sweet potato" },
+    "brócoli picante":                   { "station": "horno",   "shopping": "verduras",  "en": "spicy broccoli" },
+    "col rallada":                       { "station": "frio",    "shopping": "verduras",  "en": "shredded cabbage" },
+    "col rizada rallada":                { "station": "frio",    "shopping": "verduras",  "en": "shredded kale" },
+    "lechuga romana picada":             { "station": "frio",    "shopping": "verduras",  "en": "chopped romaine" },
+    "espinaca bebé":                     { "station": "frio",    "shopping": "verduras",  "en": "baby spinach" },
+    "mezcla de lechuga":                 { "station": "frio",    "shopping": "verduras",  "en": "mixed greens" },
+    "mezcla de lechuga verde":           { "station": "frio",    "shopping": "verduras",  "en": "mixed greens" },
+    "tomates":                           { "station": "frio",    "shopping": "verduras",  "en": "tomatoes" },
+    "zanahorias crudas":                 { "station": "frio",    "shopping": "verduras",  "en": "raw carrots" },
+    "pepinos":                           { "station": "frio",    "shopping": "verduras",  "en": "cucumbers" },
+    "aguacate":                          { "station": "frio",    "shopping": "verduras",  "en": "avocado" },
+    "manzanas":                          { "station": "frio",    "shopping": "verduras",  "en": "apples" },
+    "cebollas encurtidas":               { "station": "frio",    "shopping": "verduras",  "en": "pickled onions", "prep": { "es": "Paiteña + limón + sal. Mínimo 30 min antes.", "en": "Red onion, lime, salt. At least 30 min ahead." } },
+    "cebollas crujientes":               { "station": "tostado", "shopping": "verduras",  "en": "crispy onions" },
+    "cilantro":                          { "station": "montaje", "shopping": "verduras",  "en": "cilantro" },
+    "albahaca":                          { "station": "montaje", "shopping": "verduras",  "en": "basil" },
+    "rodaja de lima":                    { "station": "montaje", "shopping": "verduras",  "en": "lime wedge" },
+    "rodaja de limón":                   { "station": "montaje", "shopping": "verduras",  "en": "lime wedge" },
+    "ensalada de verduras":              { "station": "frio",    "shopping": "verduras",  "en": "vegetable slaw" },
+
+    "pollo asado":                       { "station": "plancha", "shopping": "proteinas", "en": "roasted chicken", "prep": { "es": "Mismo pollo que el ennegrecido, sazón simple.", "en": "Same bird as the blackened, simple seasoning." } },
+    "pollo ennegrecido":                 { "station": "plancha", "shopping": "proteinas", "en": "blackened chicken", "prep": { "es": "Mismo pollo que el asado, sazón picante.", "en": "Same bird as the roasted, spiced rub." } },
+    "carne con ajo caramelizado":        { "station": "plancha", "shopping": "proteinas", "en": "caramelized garlic steak" },
+    "garbanzos":                         { "station": "frio",    "shopping": "proteinas", "en": "chickpeas" },
+    "huevo duro":                        { "station": "frio",    "shopping": "proteinas", "en": "hard-boiled egg" },
+
+    "queso fresco":                      { "station": "montaje", "shopping": "lacteos",   "en": "fresh cheese" },
+    "queso azul":                        { "station": "montaje", "shopping": "lacteos",   "en": "blue cheese" },
+    "queso de cabra":                    { "station": "montaje", "shopping": "lacteos",   "en": "goat cheese" },
+    "parmesano rallado":                 { "station": "montaje", "shopping": "lacteos",   "en": "shaved parmesan" },
+    "crujientes de parmesano":           { "station": "tostado", "shopping": "lacteos",   "en": "parmesan crisps" },
+
+    "arroz integral":                    { "station": "horno",   "shopping": "secos",     "en": "brown rice" },
+    "arroz blanco":                      { "station": "horno",   "shopping": "secos",     "en": "white rice" },
+    "quinoa con hierbas":                { "station": "horno",   "shopping": "secos",     "en": "herbed quinoa" },
+    "maní tostado":                      { "station": "tostado", "shopping": "secos",     "en": "toasted peanuts" },
+    "almendras tostadas":                { "station": "tostado", "shopping": "secos",     "en": "roasted almonds" },
+    "pan rallado":                       { "station": "tostado", "shopping": "secos",     "en": "breadcrumbs" },
+    "chips de tortilla":                 { "station": "montaje", "shopping": "secos",     "en": "tortilla chips" },
+    "hummus":                            { "station": "salsa",   "shopping": "secos",     "en": "hummus" },
+
+    "vinagreta de cilantro y limón":     { "station": "salsa",   "shopping": "secos",     "en": "cilantro lime vinaigrette", "prep": { "es": "Cilantro, limón sutil, aceite, ajo, sal.", "en": "Cilantro, lime, oil, garlic, salt." } },
+    "vinagreta de cilantro limón y jalapeño": { "station": "salsa", "shopping": "secos",  "en": "cilantro lime jalapeño vinaigrette" },
+    "vinagreta de pesto":                { "station": "salsa",   "shopping": "secos",     "en": "pesto vinaigrette" },
+    "vinagreta balsámica":               { "station": "salsa",   "shopping": "secos",     "en": "balsamic vinaigrette" },
+    "aderezo césar":                     { "station": "salsa",   "shopping": "secos",     "en": "Caesar dressing" },
+    "aderezo ranch":                     { "station": "salsa",   "shopping": "secos",     "en": "ranch dressing" },
+    "ranch con diosa verde":             { "station": "salsa",   "shopping": "secos",     "en": "green goddess ranch" },
+    "aderezo ranch diosa verde":         { "station": "salsa",   "shopping": "secos",     "en": "green goddess ranch" },
+    "salsa bbq con miel":                { "station": "salsa",   "shopping": "secos",     "en": "honey BBQ sauce" },
+    "salsa de mostaza con miel picante": { "station": "salsa",   "shopping": "secos",     "en": "hot honey mustard", "prep": { "es": "Mostaza, miel, ají.", "en": "Mustard, honey, chilli." } },
+    "salsa picante":                     { "station": "salsa",   "shopping": "secos",     "en": "hot sauce" },
+
+    "infusión de flores de jamaica":     { "station": "salsa",   "shopping": "bebidas",   "en": "hibiscus infusion" },
+    "endulzada al gusto":                { "station": "montaje", "shopping": "bebidas",   "en": "sweetened to taste" }
+  },
+  "assembly": {
+    "es": ["Base (arroz o verdes)", "Verduras", "Proteína", "Topping crocante", "Salsa encima", "Limón"],
+    "en": ["Base (rice or greens)", "Vegetables", "Protein", "Crunchy topping", "Sauce on top", "Lime"]
+  },
+  "portions": [
+    { "item": { "es": "Base (arroz o verdes)", "en": "Base (rice or greens)" }, "amount": "150–180 g" },
+    { "item": { "es": "Hoja verde",            "en": "Leafy greens" },         "amount": "80–100 g" },
+    { "item": { "es": "Proteína",              "en": "Protein" },              "amount": "100–120 g" },
+    { "item": { "es": "Camote o brócoli",      "en": "Sweet potato or broccoli" }, "amount": "60–80 g" },
+    { "item": { "es": "Salsa",                 "en": "Sauce" },                "amount": "30 ml" },
+    { "item": { "es": "Maní o queso",          "en": "Peanuts or cheese" },    "amount": "15–20 g" }
+  ]
+}
