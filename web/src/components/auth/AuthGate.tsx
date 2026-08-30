@@ -32,6 +32,8 @@ I18n.putVocabulariesForLanguage("es", {
   "Enter your Password": "Tu contraseña",
   "Confirm Password": "Confirma tu contraseña",
   "Please confirm your Password": "Confirma tu contraseña",
+  // Amplify's own is "Iniciar Sesión con Google" — mid-sentence capital.
+  "Sign In with Google": "Iniciar sesión con Google",
 });
 
 /**
@@ -63,7 +65,11 @@ export function AuthGate({
   return (
     <ThemeProvider theme={authTheme}>
       <Authenticator.Provider>
-        <Authenticator loginMechanisms={["email"]} signUpAttributes={["email"]}>
+        <Authenticator
+          loginMechanisms={["email"]}
+          signUpAttributes={["email"]}
+          socialProviders={["google"]}
+        >
           {() => <AuthedChildren>{children}</AuthedChildren>}
         </Authenticator>
       </Authenticator.Provider>

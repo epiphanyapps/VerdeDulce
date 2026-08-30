@@ -1,4 +1,35 @@
-import { defineAuth } from "@aws-amplify/backend";
+import { defineAuth, secret } from "@aws-amplify/backend";
+
+/**
+ * Origins the site is served from. Cognito matches OAuth redirects exactly, so
+ * every origin the Authenticator can run on has to be listed — including the
+ * apex, which 302s to www for page loads but is still a valid dev/test entry.
+ */
+const ORIGINS = [
+  "http://localhost:3000",
+  "https://verdedulce.com",
+  "https://www.verdedulce.com",
+];
+
+/** Every page that mounts the Authenticator, in every locale (see web/src/i18n/routing.ts). */
+const LOCALES = ["es", "en"];
+const AUTH_PAGES = ["login", "account", "loyalty", "admin"];
+
+/**
+ * Amplify picks the callback URL whose origin *and* path match the page the
+ * user started from, so listing each gated page returns them where they were
+ * instead of dumping everyone on /es/login/. Trailing slashes are required —
+ * the static export serves directory-style URLs (`trailingSlash: true`).
+ */
+const callbackUrls = ORIGINS.flatMap((origin) =>
+  LOCALES.flatMap((locale) =>
+    AUTH_PAGES.map((page) => `${origin}/${locale}/${page}/`)
+  )
+);
+
+const logoutUrls = ORIGINS.flatMap((origin) =>
+  LOCALES.map((locale) => `${origin}/${locale}/`)
+);
 
 /**
  * Define and configure your auth resource
@@ -7,6 +38,24 @@ import { defineAuth } from "@aws-amplify/backend";
 export const auth = defineAuth({
   loginWith: {
     email: true,
+    externalProviders: {
+      google: {
+        // Set with `npx ampx sandbox secret set` locally, and in the Amplify
+        // console (App settings -> Secrets) for the deployed branches.
+        clientId: secret("GOOGLE_CLIENT_ID"),
+        clientSecret: secret("GOOGLE_CLIENT_SECRET"),
+        scopes: ["email", "profile", "openid"],
+        // email is a required attribute on this pool; without the mapping
+        // Cognito rejects the federated sign-up.
+        attributeMapping: { email: "email" },
+      },
+      // Note: the Cognito hosted-UI domain prefix is NOT settable here —
+      // @aws-amplify/backend-auth overwrites it with a stable hash of the
+      // backend id. Read the resulting domain out of amplify_outputs.json
+      // (auth.oauth.domain) after the first deploy.
+      callbackUrls,
+      logoutUrls,
+    },
   },
   groups: ["ADMINS", "EDITORS"],
 });

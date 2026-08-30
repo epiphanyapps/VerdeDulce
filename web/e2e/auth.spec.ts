@@ -20,7 +20,9 @@ async function signIn(page: import("@playwright/test").Page, email: string) {
   await page.goto("/es/login/");
   await page.getByLabel("Correo electrónico").fill(email);
   await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD!);
-  await page.getByRole("button", { name: "Iniciar sesión" }).click();
+  // `exact` matters now that "Iniciar sesión con Google" is on the same panel —
+  // the default substring match would hit both buttons.
+  await page.getByRole("button", { name: "Iniciar sesión", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/account\/$/, { timeout: 30_000 });
 }
 
@@ -38,6 +40,17 @@ test.describe("authenticator, signed out", () => {
   test("renders in English on the English route", async ({ page }) => {
     await page.goto("/en/login/");
     await expect(page.getByRole("tab", { name: "Sign In" })).toBeVisible();
+  });
+
+  test("offers Google as a sign-in option in both locales", async ({ page }) => {
+    await page.goto("/es/login/");
+    await expect(
+      page.getByRole("button", { name: "Iniciar sesión con Google" }),
+    ).toBeVisible();
+    await page.goto("/en/login/");
+    await expect(
+      page.getByRole("button", { name: "Sign In with Google" }),
+    ).toBeVisible();
   });
 
   test("account and admin are gated", async ({ page }) => {
