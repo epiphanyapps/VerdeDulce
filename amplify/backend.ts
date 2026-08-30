@@ -1,5 +1,6 @@
 import { defineBackend } from "@aws-amplify/backend";
 import { auth } from "./auth/resource";
+import { preSignUp } from "./auth/pre-sign-up/resource";
 // import { data, registerUserFunction } from "./data/resource";
 import { storage } from "./storage/resource";
 import { EmailIdentity } from "aws-cdk-lib/aws-ses";
@@ -14,6 +15,7 @@ import { CfnApp } from "aws-cdk-lib/aws-pinpoint";
  */
 const backend = defineBackend({
   auth,
+  preSignUp,
   // data,
   // registerUserFunction,
   storage,
@@ -82,3 +84,27 @@ backend.addOutput({
     },
   },
 });
+
+/**
+ * Lets the pre-sign-up trigger read and link users in the pool.
+ *
+ * The resource is a wildcard over this account and region rather than the
+ * pool's own ARN, deliberately. The pool declares the function as a trigger and
+ * the function would declare a dependency on the pool, which CloudFormation
+ * rejects as a circular reference. The handler reads the real pool id off the
+ * trigger event, so it never acts outside the pool that invoked it.
+ */
+const preSignUpStack = Stack.of(backend.preSignUp.resources.lambda);
+
+backend.preSignUp.resources.lambda.addToRolePolicy(
+  new PolicyStatement({
+    sid: "LinkFederatedIdentityToExistingUser",
+    actions: [
+      "cognito-idp:ListUsers",
+      "cognito-idp:AdminLinkProviderForUser",
+    ],
+    resources: [
+      `arn:aws:cognito-idp:${preSignUpStack.region}:${preSignUpStack.account}:userpool/*`,
+    ],
+  }),
+);

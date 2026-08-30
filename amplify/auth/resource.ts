@@ -1,4 +1,5 @@
 import { defineAuth, secret } from "@aws-amplify/backend";
+import { preSignUp } from "./pre-sign-up/resource";
 
 /**
  * Origins the site is served from. Cognito matches OAuth redirects exactly, so
@@ -56,6 +57,11 @@ export const auth = defineAuth({
       callbackUrls,
       logoutUrls,
     },
+  },
+  triggers: {
+    // Attaches a Google sign-in to an existing email account instead of
+    // creating a second user. See pre-sign-up/handler.ts.
+    preSignUp,
   },
   groups: ["ADMINS", "EDITORS"],
 });
