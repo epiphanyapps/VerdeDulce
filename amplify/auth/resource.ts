@@ -48,7 +48,21 @@ export const auth = defineAuth({
         scopes: ["email", "profile", "openid"],
         // email is a required attribute on this pool; without the mapping
         // Cognito rejects the federated sign-up.
-        attributeMapping: { email: "email" },
+        //
+        // email_verified is mapped because the pre-sign-up trigger refuses to
+        // link a federated identity into an existing account unless the
+        // provider asserts the address was verified. Without this the claim
+        // never reaches the trigger and no linking can happen at all.
+        //
+        // It goes through `custom` rather than a named key: this repo is on
+        // aws-cdk-lib 2.158, whose AttributeMapping predates `emailVerified`.
+        // Amplify documents `custom` as the route for standard attributes its
+        // typed keys do not cover yet. Move it to `emailVerified` if CDK is
+        // ever bumped past 2.181.
+        attributeMapping: {
+          email: "email",
+          custom: { email_verified: "email_verified" },
+        },
       },
       // Note: the Cognito hosted-UI domain prefix is NOT settable here —
       // @aws-amplify/backend-auth overwrites it with a stable hash of the

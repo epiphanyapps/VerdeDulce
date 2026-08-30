@@ -9,6 +9,20 @@ import {
 const cognito = new CognitoIdentityProviderClient({});
 
 /**
+ * Providers whose asserted email address is trusted enough to take over an
+ * existing account.
+ *
+ * Linking on an email match alone is an account-takeover primitive: anyone who
+ * can make a provider assert `someone-elses@address` inherits that account,
+ * including its group membership. Only providers that verify ownership of the
+ * address belong here, and adding one is a security decision, not a
+ * configuration change.
+ *
+ * The names are Cognito's provider names, which prefix the federated username.
+ */
+const PROVIDERS_THAT_VERIFY_EMAIL = new Set(["Google", "SignInWithApple"]);
+
+/**
  * Links a federated sign-in to an existing native account with the same email.
  *
  * Cognito does not do this on its own. Someone who registered with a password
@@ -32,12 +46,27 @@ export const handler: PreSignUpTriggerHandler = async (event) => {
     return event;
   }
 
+  // Cognito passes mapped IdP claims as strings, so this is "true", not true.
+  // An unverified address proves nothing about who is signing in: without this
+  // check, registering with a provider under a victim's address would silently
+  // hand over their account. Falling through creates a separate new user, which
+  // is the safe outcome.
+  if (event.request.userAttributes.email_verified !== "true") {
+    return event;
+  }
+
   // `userName` for a federated sign-up is "<Provider>_<subject>", e.g.
   // "Google_11223344556677889900".
   const separator = event.userName.indexOf("_");
   if (separator < 1) return event;
   const providerName = event.userName.slice(0, separator);
   const providerUserId = event.userName.slice(separator + 1);
+
+  // A provider added later must be reviewed and added deliberately, rather than
+  // inheriting the ability to link into existing accounts by default.
+  if (!PROVIDERS_THAT_VERIFY_EMAIL.has(providerName)) {
+    return event;
+  }
 
   // The pool id arrives on the event, so the function needs no configuration
   // and no environment variable to keep in sync.
@@ -66,8 +95,9 @@ export const handler: PreSignUpTriggerHandler = async (event) => {
     }),
   );
 
-  // The destination account already verified this address when it was created,
-  // so the linked sign-in should not be sent back through confirmation.
+  // Safe only because both sides of the link are verified: the destination
+  // account verified this address when it was created, and the checks above
+  // established that the provider asserts the same verified address.
   event.response.autoConfirmUser = true;
   event.response.autoVerifyEmail = true;
 
