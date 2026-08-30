@@ -53,6 +53,43 @@ module graph; it runs automatically on `dev` and `build`.
 All auth is client-side, so the auth-gated pages are still statically exported —
 they render their signed-out state in the HTML.
 
+#### Sign in with Google
+
+`amplify/auth/resource.ts` declares Google as an external provider and
+`AuthGate` renders the button (`socialProviders={["google"]}`). Cognito hosts
+the OAuth exchange, so the flow leaves the site and comes back — the callback
+URLs in `resource.ts` list every gated page in both locales, with the trailing
+slash the static export requires. **Add a new gated page there too**, or
+returning users land on the wrong one.
+
+The provider needs credentials that are not in the repo. One-time setup:
+
+1. In the Google Cloud console, create an OAuth 2.0 **Web application** client.
+   - Authorized JavaScript origin: `https://www.verdedulce.com`
+   - Authorized redirect URI: the Cognito domain's callback,
+     `https://<user-pool-domain>/oauth2/idpresponse`. The domain is created by
+     this deploy — read it from `amplify_outputs.json` (`auth.oauth.domain`)
+     after the first `ampx` run, or from the Cognito console.
+2. Store the credentials as Amplify secrets:
+
+   ```bash
+   npx ampx sandbox secret set GOOGLE_CLIENT_ID
+   npx ampx sandbox secret set GOOGLE_CLIENT_SECRET
+   ```
+
+   For the deployed branches, set the same two names under **App settings ->
+   Secrets** in the Amplify console. `ampx` fails the build if either is
+   missing.
+3. Redeploy, then `pnpm build` so the regenerated `amplify_outputs.json` (now
+   carrying the `oauth` block) is baked into the bundle.
+
+Until step 3 lands the button renders but the redirect fails — there is no
+hosted domain to send the user to.
+
+One caveat worth knowing: Cognito does not link a Google identity to an
+existing native account with the same address. Someone who signed up with
+email and password and later chooses Google is a second, separate user.
+
 ### Adding or changing a menu item
 
 Edit `src/content/menu.json` and redeploy. Images upload to the

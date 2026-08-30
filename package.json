@@ -18,7 +18,7 @@
     "bundle:web": "npx expo export --platform web",
     "serve:web": "npx server dist",
     "prebuild:clean": "npx expo prebuild --clean",
-    "generate": "npx ampx generate outputs --app-id d1ptvrvloahojd --branch main",
+    "generate": "npx ampx generate outputs --app-id d2eocpcmr90v03 --branch main",
     "apiToken": "curl -X POST --data \"username=my_user&password=my_password&device_name=my_device\" https://tastyigniter.verdedulce.com/api/token"
   },
   "jest": {
