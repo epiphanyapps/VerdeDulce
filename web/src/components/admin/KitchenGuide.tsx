@@ -4,6 +4,10 @@ import { getMenuSections } from "@/content/menu";
 import { formatPrice } from "@/lib/format";
 import {
   assembly,
+  dailyAmount,
+  expectedCovers,
+  formatAmount,
+  safety,
   kitchenStats,
   portions,
   prepByStation,
@@ -103,25 +107,55 @@ export async function KitchenGuide({ locale }: { locale: Locale }) {
         </div>
       </Section>
 
-      <Section title={t("shopping.title")} hint={t("shopping.hint")}>
+      <Section
+        title={t("shopping.title")}
+        hint={t("shopping.hint", { covers: expectedCovers })}
+      >
         <div className="grid gap-8 sm:grid-cols-2">
           {shoppingList().map((group) => (
             <div key={group.id}>
               <h3 className="font-display text-lg">{group.name[locale]}</h3>
               <ul role="list" className="mt-3 flex flex-col gap-2">
-                {group.entries.map((entry) => (
-                  <li key={entry.key} className="flex items-baseline justify-between gap-4 text-sm">
-                    <span>{entry.label[locale]}</span>
-                    {/* How many dishes break if this runs out. */}
-                    <span className="shrink-0 tabular-nums text-on-surface-dim">
-                      {t("inDishes", { count: entry.dishes.length })}
-                    </span>
-                  </li>
-                ))}
+                {group.entries.map((entry) => {
+                  const amount = dailyAmount(entry);
+                  return (
+                    <li key={entry.key} className="flex items-baseline justify-between gap-4 text-sm">
+                      <span>{entry.label[locale]}</span>
+                      <span className="shrink-0 text-right tabular-nums text-on-surface-dim">
+                        {/* The amount is the useful number; the dish count says
+                            how much breaks if it runs out. */}
+                        {amount ? (
+                          <span className="font-medium text-on-surface">
+                            {formatAmount(amount)}
+                          </span>
+                        ) : (
+                          <span aria-hidden="true">—</span>
+                        )}
+                        <span className="ml-2">
+                          {t("inDishes", { count: entry.dishes.length })}
+                        </span>
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
         </div>
+      </Section>
+
+      <Section title={t("safety.title")} hint={t("safety.hint")}>
+        <ul role="list" className="flex flex-col gap-2">
+          {safety.rules.map((rule) => (
+            <li key={rule.es} className="flex gap-3">
+              <span aria-hidden="true" className="text-forest">•</span>
+              <span className="font-medium">{rule[locale]}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 rounded-xl bg-surface-muted p-4 text-sm">
+          {safety.note[locale]}
+        </p>
       </Section>
 
       <Section title={t("prep.title")} hint={t("prep.hint")}>
@@ -133,19 +167,29 @@ export async function KitchenGuide({ locale }: { locale: Locale }) {
                 <p className="mt-1 text-sm text-on-surface-dim">{station.note[locale]}</p>
               )}
               <ul role="list" className="mt-4 flex flex-col gap-3">
-                {station.entries.map((entry) => (
-                  <li key={entry.key}>
-                    <p className="font-medium">
-                      {entry.label[locale]}
-                      <span className="ml-2 text-sm font-normal text-on-surface-dim">
-                        {t("inDishes", { count: entry.dishes.length })}
-                      </span>
-                    </p>
-                    {entry.prep && (
-                      <p className="text-sm text-on-surface-dim">{entry.prep[locale]}</p>
-                    )}
-                  </li>
-                ))}
+                {station.entries.map((entry) => {
+                  const amount = dailyAmount(entry);
+                  return (
+                    <li key={entry.key}>
+                      <p className="font-medium">
+                        {entry.label[locale]}
+                        {amount && (
+                          <span className="ml-2 text-sm font-normal">
+                            {formatAmount(amount)}
+                          </span>
+                        )}
+                        {entry.hold && (
+                          <span className="ml-2 text-sm font-normal text-on-surface-dim">
+                            · {t("keeps")} {entry.hold}
+                          </span>
+                        )}
+                      </p>
+                      {entry.prep && (
+                        <p className="text-sm text-on-surface-dim">{entry.prep[locale]}</p>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

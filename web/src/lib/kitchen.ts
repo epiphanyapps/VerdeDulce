@@ -21,15 +21,36 @@ type ComponentMeta = {
   shopping: string;
   en: string;
   prep?: Record<Locale, string>;
+  /** Amount one serving uses, for the purchase and batch estimates. */
+  perServing?: number;
+  unit?: string;
+  /** Shelf life once prepped, refrigerated. */
+  hold?: string;
 };
 
 const components = kitchen.components as Record<string, ComponentMeta>;
+const aliases = kitchen.aliases as Record<string, string>;
+const notIngredients = new Set(kitchen.notIngredients as string[]);
 
-const normalise = (value: string) => value.toLowerCase().trim().replace(/\s+/g, " ");
+/**
+ * Descriptions are written for customers, so the same thing appears more than
+ * one way — "mezcla de lechuga" and "mezcla de lechuga verde" are one bag of
+ * leaves. Left unresolved they split the dish count between two rows and the
+ * shopping list understates what it actually needs.
+ */
+const normalise = (value: string) => {
+  const key = value.toLowerCase().trim().replace(/\s+/g, " ");
+  return aliases[key] ?? key;
+};
 
 /** Components of one dish, in menu order. */
 export function dishComponents(item: MenuItem): string[] {
-  return item.description.es.split(",").map(normalise).filter(Boolean);
+  return item.description.es
+    .split(",")
+    .map(normalise)
+    // "endulzada al gusto" parses out of the tea like an ingredient. Listing it
+    // as something to prep or buy makes the sheet look machine-made.
+    .filter((key) => key && !notIngredients.has(key));
 }
 
 export type UsedComponent = {
@@ -38,6 +59,9 @@ export type UsedComponent = {
   station: string;
   shopping: string;
   prep?: Record<Locale, string>;
+  perServing?: number;
+  unit?: string;
+  hold?: string;
   /** Dishes that need it — drives the "used in N dishes" ordering. */
   dishes: MenuItem[];
 };
@@ -66,6 +90,9 @@ export function usedComponents(): UsedComponent[] {
         station: meta?.station ?? "unmapped",
         shopping: meta?.shopping ?? "unmapped",
         prep: meta?.prep,
+        perServing: meta?.perServing,
+        unit: meta?.unit,
+        hold: meta?.hold,
         dishes: [item],
       });
     }
@@ -111,6 +138,43 @@ export function sauces(): UsedComponent[] {
   return usedComponents().filter((c) => c.station === "salsa");
 }
 
+/**
+ * Rough daily requirement for a component.
+ *
+ * Assumes covers spread evenly across the menu, which is not true — some dishes
+ * outsell others. It is a starting quantity to buy against, not a forecast, and
+ * the UI says so. Real sell-through would replace the even split; there is no
+ * order history to draw on yet.
+ */
+export function dailyAmount(
+  component: UsedComponent,
+  covers = kitchen.expectedCovers as number,
+): { grams: number; unit: string } | null {
+  if (!component.perServing) return null;
+  const share = component.dishes.length / Math.max(menuItems.length, 1);
+  return {
+    grams: Math.round(component.perServing * share * covers),
+    unit: component.unit ?? "g",
+  };
+}
+
+/** Formats a daily amount, promoting grams to kilos once it stops being readable. */
+export function formatAmount(amount: { grams: number; unit: string }): string {
+  if (amount.unit === "ml") {
+    return amount.grams >= 1000
+      ? `${(amount.grams / 1000).toFixed(1)} L`
+      : `${amount.grams} ml`;
+  }
+  return amount.grams >= 1000
+    ? `${(amount.grams / 1000).toFixed(1)} kg`
+    : `${amount.grams} g`;
+}
+
+export const expectedCovers = kitchen.expectedCovers as number;
+export const safety = kitchen.safety as {
+  rules: Record<Locale, string>[];
+  note: Record<Locale, string>;
+};
 export const assembly = kitchen.assembly as Record<Locale, string[]>;
 export const portions = kitchen.portions as {
   item: Record<Locale, string>;

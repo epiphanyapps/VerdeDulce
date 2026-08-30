@@ -183,7 +183,7 @@
     },
     "shopping": {
       "title": "Lista de compras",
-      "hint": "Ordenada por cuántos platos dependen de cada insumo. Lo de arriba no puede faltar."
+      "hint": "Cantidades estimadas para {covers} pedidos al día, repartidos parejo entre los platos. Ajustar con las ventas reales."
     },
     "prep": {
       "title": "Prep del día",
@@ -195,6 +195,11 @@
     "portions": {
       "title": "Porciones",
       "hint": "Punto de partida. Ajustar con la práctica."
+    },
+    "keeps": "dura",
+    "safety": {
+      "title": "Temperaturas y tiempos",
+      "hint": "Lo más importante de esta hoja. Con el calor de Portoviejo no hay margen."
     }
   }
 }

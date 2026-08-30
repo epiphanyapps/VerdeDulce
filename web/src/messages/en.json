@@ -183,7 +183,7 @@
     },
     "shopping": {
       "title": "Shopping list",
-      "hint": "Ordered by how many dishes depend on each item. The top must never run out."
+      "hint": "Estimated for {covers} orders a day, spread evenly across the menu. Adjust against real sales."
     },
     "prep": {
       "title": "Daily prep",
@@ -195,6 +195,11 @@
     "portions": {
       "title": "Portions",
       "hint": "A starting point. Adjust with practice."
+    },
+    "keeps": "keeps",
+    "safety": {
+      "title": "Temperatures and times",
+      "hint": "The most important part of this sheet. Portoviejo's heat leaves no margin."
     }
   }
 }
