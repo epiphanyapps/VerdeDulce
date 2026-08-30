@@ -30,6 +30,8 @@
   --color-accent: var(--color-forest);
   --color-on-accent: var(--color-lime);
   --color-border-subtle: #d5d3c0;
+  /* Used for operational warnings in the admin guide. */
+  --color-angry: #9a3412;
 
   /* Type — loaded via next/font in the root layout */
   --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
@@ -114,4 +116,39 @@
 [data-amplify-authenticator] [data-amplify-router] {
   border-radius: 0.75rem;
   overflow: hidden;
+}
+
+/**
+ * Print rules for the admin kitchen guide.
+ *
+ * The brief is meant to end up laminated on a kitchen wall, so printing drops
+ * the site chrome and forces the light palette regardless of the viewer's
+ * theme — a dark background would empty a toner cartridge per copy.
+ */
+@media print {
+  header,
+  footer,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  :root {
+    --color-surface: #ffffff;
+    --color-surface-muted: #f4f4ef;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Keep a station or category from splitting across a page break. */
+  section,
+  article > div {
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: "";
+  }
 }

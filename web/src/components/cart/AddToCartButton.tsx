@@ -3,9 +3,23 @@
 import { useTranslations } from "next-intl";
 import { useCart } from "./CartProvider";
 
-export function AddToCartButton({ slug }: { slug: string }) {
+export function AddToCartButton({
+  slug,
+  available = true,
+}: {
+  slug: string;
+  available?: boolean;
+}) {
   const t = useTranslations("cart");
   const { add } = useCart();
+
+  if (!available) {
+    return (
+      <p className="inline-flex items-center rounded-xl border border-border-subtle px-5 py-3 text-on-surface-dim">
+        {t("soldOut")}
+      </p>
+    );
+  }
 
   return (
     <button

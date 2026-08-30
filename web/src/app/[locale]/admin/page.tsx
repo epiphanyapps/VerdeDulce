@@ -4,6 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/pageMetadata";
 import { PageShell } from "@/components/PageShell";
 import { AdminPanel } from "@/components/auth/AdminPanel";
+import { KitchenGuide } from "@/components/admin/KitchenGuide";
+import { PrintButton } from "@/components/admin/PrintButton";
 
 export async function generateMetadata({
   params,
@@ -24,11 +26,12 @@ export default async function AdminPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("admin");
+  const t = await getTranslations("kitchen");
 
   return (
-    <PageShell title={t("title")} subtitle={t("subtitle")}>
-      <AdminPanel />
+    <PageShell title={t("title")} subtitle={t("subtitle")} width="wide">
+      <PrintButton label={t("print")} />
+      <AdminPanel guide={<KitchenGuide locale={locale} />} />
     </PageShell>
   );
 }

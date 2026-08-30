@@ -139,6 +139,11 @@ export default async function MenuItemPage({
             >
               {tn("perServing")}
             </h2>
+            {item.nutritionEstimated && (
+              // The dish was reformulated; the inherited figures are close but
+              // no longer exact. Saying so beats printing them as fact.
+              <p className="mt-1 text-sm text-on-surface-dim">{tn("approximate")}</p>
+            )}
             <NutritionBullets nutrition={item.nutrition} className="mt-4" />
           </section>
 
@@ -149,7 +154,7 @@ export default async function MenuItemPage({
               {t("orderOnWhatsapp")}
               <ArrowIcon />
             </CTAAnchor>
-            <AddToCartButton slug={item.slug} />
+            <AddToCartButton slug={item.slug} available={item.available} />
           </div>
         </div>
       </article>

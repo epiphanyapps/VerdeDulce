@@ -5,8 +5,9 @@ const paths = sitemapPaths();
 
 test.describe("every sitemap route", () => {
   test("the sitemap is not empty", () => {
-    // Guards against the suite silently passing because it found no routes.
-    expect(paths.length).toBeGreaterThan(30);
+    // Guards against the suite silently passing because it found no routes,
+    // without pinning a number that a menu change would invalidate.
+    expect(paths.length).toBeGreaterThan(10);
   });
 
   for (const path of paths) {

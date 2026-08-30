@@ -9,14 +9,38 @@
       "title": "Menu",
       "description": "Browse the full Verde Dulce menu: bowls, salads, protein plates, and drinks, with nutrition information for every dish."
     },
-    "faq": { "title": "Frequently asked questions", "description": "Hours, delivery, payment methods, and catering at Verde Dulce." },
-    "loyalty": { "title": "Loyalty", "description": "Buy nine salads and the tenth is free." },
-    "gift": { "title": "Gift cards", "description": "Give Verde Dulce." },
-    "account": { "title": "My account", "description": "Manage your Verde Dulce account." },
-    "settings": { "title": "Settings", "description": "Your account preferences." },
-    "login": { "title": "Sign in", "description": "Sign in to your Verde Dulce account." },
-    "cart": { "title": "Your order", "description": "Review your order before sending it over WhatsApp." },
-    "admin": { "title": "Admin", "description": "Menu management." }
+    "faq": {
+      "title": "Frequently asked questions",
+      "description": "Hours, delivery, payment methods, and catering at Verde Dulce."
+    },
+    "loyalty": {
+      "title": "Loyalty",
+      "description": "Buy nine salads and the tenth is free."
+    },
+    "gift": {
+      "title": "Gift cards",
+      "description": "Give Verde Dulce."
+    },
+    "account": {
+      "title": "My account",
+      "description": "Manage your Verde Dulce account."
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Your account preferences."
+    },
+    "login": {
+      "title": "Sign in",
+      "description": "Sign in to your Verde Dulce account."
+    },
+    "cart": {
+      "title": "Your order",
+      "description": "Review your order before sending it over WhatsApp."
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Menu management."
+    }
   },
   "nav": {
     "brand": "Verde Dulce",
@@ -60,7 +84,8 @@
     "fat": "Fat",
     "shortCalories": "CAL",
     "perServing": "Per serving",
-    "grams": "{value} g"
+    "grams": "{value} g",
+    "approximate": "Approximate — the recipe changed and the figures are being recalculated."
   },
   "faq": {
     "title": "Frequently asked questions",
@@ -100,12 +125,16 @@
     "total": "Total",
     "checkout": "Send order on WhatsApp",
     "orderIntro": "Hi, I would like to place this order with Verde Dulce:",
-    "itemCount": "{count, plural, =0 {No items} one {# item} other {# items}}"
+    "itemCount": "{count, plural, =0 {No items} one {# item} other {# items}}",
+    "soldOut": "Not available today"
   },
   "admin": {
     "title": "Admin",
     "subtitle": "Menu management.",
-    "restricted": "You need administrator access to view this page."
+    "restricted": "You need administrator access to view this page.",
+    "signedInAs": "Signed in as",
+    "uploads": "Upload menu photos",
+    "uploadsHint": "Photos go to menu-pictures/ in S3."
   },
   "auth": {
     "signIn": "Sign in",
@@ -136,5 +165,43 @@
     "loading": "Loading…",
     "error": "Something went wrong.",
     "retry": "Try again"
+  },
+  "kitchen": {
+    "title": "Kitchen guide",
+    "subtitle": "Everything needed to run the current menu. Generated from the published menu, so it always matches what is actually sold.",
+    "print": "Print",
+    "inDishes": "{count, plural, one {# dish} other {# dishes}}",
+    "gaps": "No kitchen data for: {list}. Add them to kitchen.json or they will not appear on the shopping list.",
+    "derived": "Generated automatically from the published menu: {count} prep components.",
+    "stats": {
+      "dishes": "Dishes",
+      "components": "Prep items",
+      "sauces": "Sauces",
+      "singleUse": "Single-use"
+    },
+    "menu": {
+      "title": "The menu",
+      "hint": "Each dish with its components, in assembly order."
+    },
+    "shopping": {
+      "title": "Shopping list",
+      "hint": "Estimated for {covers} orders a day, spread evenly across the menu. Adjust against real sales."
+    },
+    "prep": {
+      "title": "Daily prep",
+      "hint": "Grouped by station rather than by dish."
+    },
+    "assembly": {
+      "title": "Assembly order"
+    },
+    "portions": {
+      "title": "Portions",
+      "hint": "A starting point. Adjust with practice."
+    },
+    "keeps": "keeps",
+    "safety": {
+      "title": "Temperatures and times",
+      "hint": "The most important part of this sheet. Portoviejo's heat leaves no margin."
+    }
   }
 }

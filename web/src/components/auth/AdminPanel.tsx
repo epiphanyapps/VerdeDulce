@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { useTranslations } from "next-intl";
+import type { ReactNode } from "react";
 import { AuthGate } from "./AuthGate";
 import { MenuUploader } from "./MenuUploader";
 
@@ -37,7 +38,7 @@ function useIsAdmin() {
   return state;
 }
 
-function AdminBody() {
+function AdminBody({ email, guide }: { email?: string; guide: ReactNode }) {
   const t = useTranslations("admin");
   const tCommon = useTranslations("common");
   const state = useIsAdmin();
@@ -50,9 +51,33 @@ function AdminBody() {
     return <p className="mt-10 text-on-surface-dim">{t("restricted")}</p>;
   }
 
-  return <MenuUploader />;
+  return (
+    <>
+      {email && (
+        <p className="mt-8 text-sm text-on-surface-dim print:hidden">
+          {t("signedInAs")} <span className="font-medium">{email}</span>
+        </p>
+      )}
+
+      {/* The guide is rendered on the server and passed through, so the whole
+          brief is static HTML and does not wait on the auth round-trip. */}
+      {guide}
+
+      <section className="mt-16 border-t border-border-subtle pt-8 print:hidden">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-on-surface-dim">
+          {t("uploads")}
+        </h2>
+        <p className="mt-1 text-sm text-on-surface-dim">{t("uploadsHint")}</p>
+        <MenuUploader />
+      </section>
+    </>
+  );
 }
 
-export function AdminPanel() {
-  return <AuthGate>{() => <AdminBody />}</AuthGate>;
+export function AdminPanel({ guide }: { guide: ReactNode }) {
+  return (
+    <AuthGate>
+      {({ email }) => <AdminBody email={email} guide={guide} />}
+    </AuthGate>
+  );
 }

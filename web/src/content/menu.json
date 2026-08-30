@@ -49,9 +49,10 @@
         "en": "Caramelized Garlic Steak"
       },
       "description": {
-        "es": "Arroz integral, brócoli picante, tomates, camote, carne con ajo caramelizado, vinagreta de pesto",
-        "en": "Brown rice, spicy broccoli, tomatoes, sweet potato, caramelized garlic steak, pesto vinaigrette"
-      }
+        "es": "Arroz integral, brócoli picante, tomates, camote, carne con ajo caramelizado, vinagreta de cilantro y limón",
+        "en": "Brown rice, spicy broccoli, tomatoes, sweet potato, caramelized garlic steak, cilantro lime vinaigrette"
+      },
+      "nutritionEstimated": true
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440030",
@@ -66,7 +67,7 @@
         "carbs": 40
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "Ensalada Picada Estilo Steakhouse",
         "en": "Steakhouse Chopped Salad"
@@ -95,9 +96,10 @@
         "en": "Harvest Bowl"
       },
       "description": {
-        "es": "Col rizada rallada, arroz integral, camote, almendras tostadas, manzanas, queso de cabra, pollo asado, vinagreta balsámica",
-        "en": "Shredded kale, brown rice, sweet potato, roasted almonds, apples, goat cheese, roasted chicken, balsamic vinaigrette"
-      }
+        "es": "Col rallada, arroz integral, camote, maní tostado, queso fresco, pollo asado, vinagreta de cilantro y limón",
+        "en": "Shredded cabbage, brown rice, sweet potato, toasted peanuts, fresh cheese, roasted chicken, cilantro lime vinaigrette"
+      },
+      "nutritionEstimated": true
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440032",
@@ -112,7 +114,7 @@
         "carbs": 40
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "Pollo a la Parmesana con Pesto",
         "en": "Chicken Pesto Parm"
@@ -158,7 +160,7 @@
         "carbs": 21
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "César de Col (Carne)",
         "en": "Kale Caesar (Steak)"
@@ -187,9 +189,10 @@
         "en": "Kale Caesar"
       },
       "description": {
-        "es": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, pollo asado, parmesano rallado, aderezo César, rodaja de lima",
-        "en": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, roasted chicken, shaved parmesan, Caesar dressing, lime squeeze"
-      }
+        "es": "Lechuga romana picada, col rallada, tomates, pollo asado, queso fresco, aderezo césar, rodaja de limón",
+        "en": "Chopped romaine, shredded cabbage, tomatoes, roasted chicken, fresh cheese, Caesar dressing, lime wedge"
+      },
+      "nutritionEstimated": true
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440036",
@@ -210,9 +213,10 @@
         "en": "Guacamole Greens"
       },
       "description": {
-        "es": "Lechuga romana picada, mezcla de lechuga verde, col rallada, tomates, chips de tortilla, cebollas encurtidas, aguacate, pollo asado, rodaja de lima, vinagreta de cilantro limón y jalapeño",
-        "en": "Chopped romaine, mixed greens, shredded cabbage, tomatoes, tortilla chips, pickled onions, avocado, roasted chicken, lime squeeze, cilantro lime jalapeño vinaigrette"
-      }
+        "es": "Lechuga romana picada, col rallada, tomates, chips de tortilla, cebollas encurtidas, aguacate, pollo asado, rodaja de limón, vinagreta de cilantro y limón",
+        "en": "Chopped romaine, shredded cabbage, tomatoes, tortilla chips, pickled onions, avocado, roasted chicken, lime wedge, cilantro lime vinaigrette"
+      },
+      "nutritionEstimated": true
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440037",
@@ -227,7 +231,7 @@
         "carbs": 38
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "Ensalada de Pollo a la BBQ",
         "en": "BBQ Chicken Salad"
@@ -250,7 +254,7 @@
         "carbs": 42
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "Hummus Crujiente",
         "en": "Hummus Crunch"
@@ -273,7 +277,7 @@
         "carbs": 32
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "Pollo Búfalo",
         "en": "Buffalo Chicken"
@@ -302,9 +306,10 @@
         "en": "Super Green Goddess"
       },
       "description": {
-        "es": "Col rizada rallada, espinaca bebé, camote, col rallada, brócoli picante, almendras tostadas, garbanzos, zanahorias crudas, aderezo ranch",
-        "en": "Shredded kale, baby spinach, sweet potato, shredded cabbage, spicy broccoli, roasted almonds, chickpeas, raw carrots, ranch dressing"
-      }
+        "es": "Col rallada, camote, brócoli picante, zanahorias crudas, garbanzos, maní tostado, aderezo ranch",
+        "en": "Shredded cabbage, sweet potato, spicy broccoli, raw carrots, chickpeas, toasted peanuts, ranch dressing"
+      },
+      "nutritionEstimated": true
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440041",
@@ -319,7 +324,7 @@
         "carbs": 36
       },
       "available": true,
-      "hidden": false,
+      "hidden": true,
       "name": {
         "es": "Jardín Cobb",
         "en": "Garden Cobb"
@@ -348,9 +353,10 @@
         "en": "Hot Honey Chicken"
       },
       "description": {
-        "es": "Quinoa con hierbas, cebollas crujientes, pollo ennegrecido, camote, ensalada de verduras, salsa de mostaza con miel picante",
-        "en": "Herbed quinoa, crispy onions, blackened chicken, sweet potato, green slaw, hot honey mustard sauce"
-      }
+        "es": "Arroz integral, cebollas crujientes, pollo ennegrecido, camote, zanahorias crudas, salsa de mostaza con miel picante",
+        "en": "Brown rice, crispy onions, blackened chicken, sweet potato, raw carrots, hot honey mustard sauce"
+      },
+      "nutritionEstimated": true
     },
     {
       "id": "550e8400-e29b-41d4-a716-446655440043",

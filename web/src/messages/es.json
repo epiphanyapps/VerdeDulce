@@ -9,14 +9,38 @@
       "title": "Menú",
       "description": "Explora el menú completo de Verde Dulce: tazones, ensaladas, platos de proteínas y bebidas, con información nutricional de cada plato."
     },
-    "faq": { "title": "Preguntas frecuentes", "description": "Horarios, entregas, métodos de pago y catering en Verde Dulce." },
-    "loyalty": { "title": "Lealtad", "description": "Acumula 9 ensaladas y la décima es gratis." },
-    "gift": { "title": "Tarjetas de regalo", "description": "Regala Verde Dulce." },
-    "account": { "title": "Mi cuenta", "description": "Administra tu cuenta de Verde Dulce." },
-    "settings": { "title": "Ajustes", "description": "Preferencias de tu cuenta." },
-    "login": { "title": "Iniciar sesión", "description": "Accede a tu cuenta de Verde Dulce." },
-    "cart": { "title": "Tu pedido", "description": "Revisa tu pedido antes de enviarlo por WhatsApp." },
-    "admin": { "title": "Administración", "description": "Gestión del menú." }
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "description": "Horarios, entregas, métodos de pago y catering en Verde Dulce."
+    },
+    "loyalty": {
+      "title": "Lealtad",
+      "description": "Acumula 9 ensaladas y la décima es gratis."
+    },
+    "gift": {
+      "title": "Tarjetas de regalo",
+      "description": "Regala Verde Dulce."
+    },
+    "account": {
+      "title": "Mi cuenta",
+      "description": "Administra tu cuenta de Verde Dulce."
+    },
+    "settings": {
+      "title": "Ajustes",
+      "description": "Preferencias de tu cuenta."
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "description": "Accede a tu cuenta de Verde Dulce."
+    },
+    "cart": {
+      "title": "Tu pedido",
+      "description": "Revisa tu pedido antes de enviarlo por WhatsApp."
+    },
+    "admin": {
+      "title": "Administración",
+      "description": "Gestión del menú."
+    }
   },
   "nav": {
     "brand": "Verde Dulce",
@@ -60,7 +84,8 @@
     "fat": "Grasa",
     "shortCalories": "CAL",
     "perServing": "Por porción",
-    "grams": "{value} g"
+    "grams": "{value} g",
+    "approximate": "Aproximado — la receta cambió; los valores se están recalculando."
   },
   "faq": {
     "title": "Preguntas frecuentes",
@@ -100,12 +125,16 @@
     "total": "Total",
     "checkout": "Enviar pedido por WhatsApp",
     "orderIntro": "Hola, me gustaría hacer este pedido con Verde Dulce:",
-    "itemCount": "{count, plural, =0 {Sin artículos} one {# artículo} other {# artículos}}"
+    "itemCount": "{count, plural, =0 {Sin artículos} one {# artículo} other {# artículos}}",
+    "soldOut": "No disponible hoy"
   },
   "admin": {
     "title": "Administración",
     "subtitle": "Gestión del menú.",
-    "restricted": "Necesitas permisos de administrador para ver esta página."
+    "restricted": "Necesitas permisos de administrador para ver esta página.",
+    "signedInAs": "Sesión iniciada como",
+    "uploads": "Subir fotos del menú",
+    "uploadsHint": "Las fotos van a menu-pictures/ en S3."
   },
   "auth": {
     "signIn": "Iniciar sesión",
@@ -136,5 +165,43 @@
     "loading": "Cargando…",
     "error": "Algo salió mal.",
     "retry": "Intentar de nuevo"
+  },
+  "kitchen": {
+    "title": "Guía de cocina",
+    "subtitle": "Todo lo que necesitas para operar el menú actual. Se genera del menú publicado, así que siempre coincide con lo que se vende.",
+    "print": "Imprimir",
+    "inDishes": "{count, plural, one {# plato} other {# platos}}",
+    "gaps": "Sin datos de cocina para: {list}. Agrégalos en kitchen.json o no aparecerán en la lista de compras.",
+    "derived": "Generado automáticamente del menú publicado: {count} preparaciones.",
+    "stats": {
+      "dishes": "Platos",
+      "components": "Preparaciones",
+      "sauces": "Salsas",
+      "singleUse": "De un solo uso"
+    },
+    "menu": {
+      "title": "El menú",
+      "hint": "Cada plato con sus preparaciones, en orden de armado."
+    },
+    "shopping": {
+      "title": "Lista de compras",
+      "hint": "Cantidades estimadas para {covers} pedidos al día, repartidos parejo entre los platos. Ajustar con las ventas reales."
+    },
+    "prep": {
+      "title": "Prep del día",
+      "hint": "Agrupado por estación, no por plato."
+    },
+    "assembly": {
+      "title": "Orden de armado"
+    },
+    "portions": {
+      "title": "Porciones",
+      "hint": "Punto de partida. Ajustar con la práctica."
+    },
+    "keeps": "dura",
+    "safety": {
+      "title": "Temperaturas y tiempos",
+      "hint": "Lo más importante de esta hoja. Con el calor de Portoviejo no hay margen."
+    }
   }
 }
