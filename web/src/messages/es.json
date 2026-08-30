@@ -84,7 +84,8 @@
     "fat": "Grasa",
     "shortCalories": "CAL",
     "perServing": "Por porción",
-    "grams": "{value} g"
+    "grams": "{value} g",
+    "approximate": "Aproximado — la receta cambió; los valores se están recalculando."
   },
   "faq": {
     "title": "Preguntas frecuentes",
@@ -124,7 +125,8 @@
     "total": "Total",
     "checkout": "Enviar pedido por WhatsApp",
     "orderIntro": "Hola, me gustaría hacer este pedido con Verde Dulce:",
-    "itemCount": "{count, plural, =0 {Sin artículos} one {# artículo} other {# artículos}}"
+    "itemCount": "{count, plural, =0 {Sin artículos} one {# artículo} other {# artículos}}",
+    "soldOut": "No disponible hoy"
   },
   "admin": {
     "title": "Administración",

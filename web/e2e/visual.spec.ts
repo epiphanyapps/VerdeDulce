@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { PAGE_SAMPLE } from "./helpers";
+import { pageSample } from "./helpers";
 
 /**
  * Full-page snapshots of one page per template. Baselines are per platform and
@@ -8,7 +8,7 @@ import { PAGE_SAMPLE } from "./helpers";
  * `pnpm test:e2e:update` inside the Playwright container.
  */
 test.describe("visual", () => {
-  for (const { path, name } of PAGE_SAMPLE) {
+  for (const { path, name } of pageSample()) {
     test(`${name} looks right`, async ({ page }, testInfo) => {
       test.skip(
         !["chromium", "mobile-safari"].includes(testInfo.project.name),

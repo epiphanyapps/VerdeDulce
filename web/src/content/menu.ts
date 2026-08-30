@@ -17,6 +17,12 @@ export type MenuItem = {
    * (MenuImage renders a branded placeholder in that case).
    */
   image: string | null;
+  /**
+   * Set when a dish was reformulated and the inherited nutrition figures no
+   * longer describe what is served. The numbers are shown as approximate
+   * rather than removed or invented.
+   */
+  nutritionEstimated?: boolean;
   /** Cents. */
   price: number;
   nutrition: {
@@ -25,6 +31,11 @@ export type MenuItem = {
     fat: number;
     carbs: number;
   };
+  /**
+   * False takes the dish off sale: it stops appearing anywhere and cannot be
+   * added to an order. Use it when the kitchen runs out. `hidden` is the
+   * stronger form — it also drops the item's page from the build entirely.
+   */
   available: boolean;
   /** Hidden items are excluded everywhere, including `generateStaticParams`. */
   hidden: boolean;
@@ -40,8 +51,17 @@ export type MenuSection = {
 const categories = data.categories as MenuCategory[];
 const allItems = data.items as MenuItem[];
 
-/** Every item intended to be public, in authored order. */
+/**
+ * Every item intended to be public, in authored order.
+ *
+ * `hidden` removes a dish from the site altogether — no page is built for it.
+ * `available` is the softer, day-to-day switch: the dish still has a page but
+ * is not sold, which is what the kitchen needs when it runs out mid-service.
+ */
 export const menuItems: MenuItem[] = allItems.filter((item) => !item.hidden);
+
+/** Dishes actually on sale right now. */
+export const availableItems: MenuItem[] = menuItems.filter((item) => item.available);
 
 /**
  * The menu grouped for display. Categories with no visible items are dropped so
@@ -51,7 +71,7 @@ export function getMenuSections(): MenuSection[] {
   return categories
     .map((category) => ({
       category,
-      items: menuItems.filter((item) => item.category === category.id),
+      items: availableItems.filter((item) => item.category === category.id),
     }))
     .filter((section) => section.items.length > 0);
 }

@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { PAGE_SAMPLE } from "./helpers";
+import { pageSample } from "./helpers";
 
 // axe is browser-agnostic; running it once keeps CI time proportionate.
 test.describe.configure({ mode: "parallel" });
 
-for (const { path, name } of PAGE_SAMPLE) {
+for (const { path, name } of pageSample()) {
   test(`${name} has no serious accessibility violations`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "chromium", "axe runs once, on chromium");
 

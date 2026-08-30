@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { onSaleCount } from "./helpers";
 
 test.describe("navigation", () => {
   test("the skip link is reachable by keyboard and jumps to content", async ({ page, browserName }) => {
@@ -24,8 +25,9 @@ test.describe("navigation", () => {
   test("the menu grid is a list of articles", async ({ page }) => {
     await page.goto("/es/");
     // Semantic markup is the reason this rewrite exists; assert it rather than
-    // trusting it.
-    await expect(page.locator("main article")).toHaveCount(14);
+    // trusting it. The count comes from the content so a menu change is not
+    // reported as a test failure.
+    await expect(page.locator("main article")).toHaveCount(onSaleCount());
     await expect(page.locator("main ul[role='list']").first()).toBeVisible();
   });
 
