@@ -6,9 +6,10 @@ import {
   translations,
   useAuthenticator,
 } from "@aws-amplify/ui-react";
+import { fetchUserAttributes } from "aws-amplify/auth";
 import { I18n } from "aws-amplify/utils";
 import { useLocale, useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import "@aws-amplify/ui-react/styles.css";
 import { amplifyConfigured } from "./AmplifyProvider";
 import { authTheme } from "./authTheme";
@@ -87,5 +88,32 @@ function AuthedChildren({
     context.signOut,
   ]);
 
-  return <>{children({ email: user?.signInDetails?.loginId, signOut })}</>;
+  /**
+   * `signInDetails.loginId` is only set when someone typed a username — it is
+   * undefined for a federated sign-in, because Google supplied the identity
+   * instead. Falling back to the ID token attributes covers both, and is why
+   * the account page showed an empty email for Google users.
+   */
+  const typedLogin = user?.signInDetails?.loginId;
+  const [email, setEmail] = useState<string | undefined>(typedLogin);
+
+  useEffect(() => {
+    if (typedLogin) {
+      setEmail(typedLogin);
+      return;
+    }
+    let cancelled = false;
+    fetchUserAttributes()
+      .then((attributes) => {
+        if (!cancelled) setEmail(attributes.email);
+      })
+      // Leaving the field blank is better than surfacing an auth error here;
+      // the page is still usable without it.
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [typedLogin, user?.userId]);
+
+  return <>{children({ email, signOut })}</>;
 }
