@@ -60,6 +60,15 @@ test.describe("authenticator, signed out", () => {
     await expect(page.getByRole("tab", { name: "Iniciar sesión" })).toBeVisible();
   });
 
+  test("loyalty sells the programme above the sign-in form", async ({ page }) => {
+    await page.goto("/es/loyalty/");
+    // The gate used to show a bare Cognito widget. The welcome stamp is the
+    // reason to register, so it has to be legible before signing up.
+    await expect(page.getByText("Cómo funciona")).toBeVisible();
+    await expect(page.getByText(/primer sello ya está en la tarjeta/)).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Crear cuenta" })).toBeVisible();
+  });
+
   test("auth pages are excluded from search", async ({ page }) => {
     await page.goto("/es/account/");
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
@@ -114,6 +123,19 @@ test.describe("authenticator, signed in", () => {
   test("the loyalty card shows once signed in", async ({ page }) => {
     await signIn(page, USER);
     await page.goto("/es/loyalty/");
-    await expect(page.getByRole("list", { name: /lealtad/i })).toBeVisible();
+
+    // The card is opened by `ensureLoyaltyCard` on first render, so this also
+    // covers the mutation round-trip, not just the markup.
+    await expect(page.getByRole("list", { name: "Tarjeta de sellos" })).toBeVisible({
+      timeout: 30_000,
+    });
+
+    // The member code is the whole point of the page at the counter: six
+    // characters from the unambiguous alphabet the handler mints from.
+    await expect(page.getByText(/^[ACDEFGHJKMNPQRTUVWXY3469]{6}$/)).toBeVisible();
+
+    // Every card carries the welcome stamp, so the history is never empty and
+    // the progress line is never a bare zero.
+    await expect(page.getByText("Sello de bienvenida")).toBeVisible();
   });
 });

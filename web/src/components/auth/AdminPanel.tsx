@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { AuthGate } from "./AuthGate";
 import { MenuUploader } from "./MenuUploader";
+import { LoyaltyPunch } from "../admin/LoyaltyPunch";
 
 /**
  * Group membership is read from the Cognito ID token. This is a UI affordance
@@ -41,6 +42,7 @@ function useIsAdmin() {
 function AdminBody({ email, guide }: { email?: string; guide: ReactNode }) {
   const t = useTranslations("admin");
   const tCommon = useTranslations("common");
+  const tLoyalty = useTranslations("loyaltyPunch");
   const state = useIsAdmin();
 
   if (state === "loading") {
@@ -62,6 +64,14 @@ function AdminBody({ email, guide }: { email?: string; guide: ReactNode }) {
       {/* The guide is rendered on the server and passed through, so the whole
           brief is static HTML and does not wait on the auth round-trip. */}
       {guide}
+
+      <section className="mt-16 border-t border-border-subtle pt-8 print:hidden">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-on-surface-dim">
+          {tLoyalty("title")}
+        </h2>
+        <p className="mt-1 text-sm text-on-surface-dim">{tLoyalty("hint")}</p>
+        <LoyaltyPunch />
+      </section>
 
       <section className="mt-16 border-t border-border-subtle pt-8 print:hidden">
         <h2 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-on-surface-dim">

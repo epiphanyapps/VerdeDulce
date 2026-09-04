@@ -47,8 +47,16 @@ I18n.putVocabulariesForLanguage("es", {
  */
 export function AuthGate({
   children,
+  signedOutHeader,
 }: {
   children: (props: { email?: string; signOut?: () => void }) => ReactNode;
+  /**
+   * Rendered above the sign-in widget, and only while signed out. It goes
+   * through the Authenticator's own `Header` slot rather than being placed
+   * beside the gate, because that is the one position that disappears on sign
+   * in without the caller having to track auth state itself.
+   */
+  signedOutHeader?: ReactNode;
 }) {
   const t = useTranslations("common");
   const locale = useLocale();
@@ -70,6 +78,7 @@ export function AuthGate({
           loginMechanisms={["email"]}
           signUpAttributes={["email"]}
           socialProviders={["google"]}
+          components={signedOutHeader ? { Header: () => <>{signedOutHeader}</> } : undefined}
         >
           {() => <AuthedChildren>{children}</AuthedChildren>}
         </Authenticator>
