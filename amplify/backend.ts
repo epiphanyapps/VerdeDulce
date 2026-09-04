@@ -1,7 +1,7 @@
 import { defineBackend } from "@aws-amplify/backend";
 import { auth } from "./auth/resource";
 import { preSignUp } from "./auth/pre-sign-up/resource";
-// import { data, registerUserFunction } from "./data/resource";
+import { data } from "./data/resource";
 import { storage } from "./storage/resource";
 import { EmailIdentity } from "aws-cdk-lib/aws-ses";
 import { Stack } from "aws-cdk-lib/core";
@@ -16,10 +16,8 @@ import { CfnApp } from "aws-cdk-lib/aws-pinpoint";
 const backend = defineBackend({
   auth,
   preSignUp,
-  // data,
-  // registerUserFunction,
+  data,
   storage,
-  // registerUserFunction,
 });
 
 // console.log(backend.data., "::: backend.data.resources")
