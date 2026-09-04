@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import outputs from "../src/generated/amplify_outputs.json";
 
 /**
  * Credentials come from the environment. Without them the suite still asserts
@@ -8,6 +9,18 @@ import { test, expect } from "@playwright/test";
 const PASSWORD = process.env.E2E_PASSWORD;
 const USER = process.env.E2E_USER ?? "e2e-user@verdedulce.com";
 const ADMIN = process.env.E2E_ADMIN ?? "e2e-admin@verdedulce.com";
+
+/**
+ * Whether the loyalty API exists in the environment under test.
+ *
+ * The loyalty page opens a card through `ensureLoyaltyCard` on first render, so
+ * its test cannot pass until the data resource has been deployed and
+ * `amplify_outputs.json` refreshed — and the backend only deploys on merge to
+ * main, which this suite gates. Rather than assert something environmental and
+ * go red for the wrong reason, the test declares the dependency and skips until
+ * it is met. It turns itself on with no edit once the outputs carry `data`.
+ */
+const LOYALTY_API = "data" in outputs;
 
 /**
  * Signs in and waits for the session to be established.
@@ -58,6 +71,15 @@ test.describe("authenticator, signed out", () => {
     await expect(page.getByRole("tab", { name: "Iniciar sesión" })).toBeVisible();
     await page.goto("/es/admin/");
     await expect(page.getByRole("tab", { name: "Iniciar sesión" })).toBeVisible();
+  });
+
+  test("loyalty sells the programme above the sign-in form", async ({ page }) => {
+    await page.goto("/es/loyalty/");
+    // The gate used to show a bare Cognito widget. The welcome stamp is the
+    // reason to register, so it has to be legible before signing up.
+    await expect(page.getByText("Cómo funciona")).toBeVisible();
+    await expect(page.getByText(/primer sello ya está en la tarjeta/)).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Crear cuenta" })).toBeVisible();
   });
 
   test("auth pages are excluded from search", async ({ page }) => {
@@ -112,8 +134,22 @@ test.describe("authenticator, signed in", () => {
   });
 
   test("the loyalty card shows once signed in", async ({ page }) => {
+    test.skip(!LOYALTY_API, "loyalty data resource is not deployed in this environment");
     await signIn(page, USER);
     await page.goto("/es/loyalty/");
-    await expect(page.getByRole("list", { name: /lealtad/i })).toBeVisible();
+
+    // The card is opened by `ensureLoyaltyCard` on first render, so this also
+    // covers the mutation round-trip, not just the markup.
+    await expect(page.getByRole("list", { name: "Tarjeta de sellos" })).toBeVisible({
+      timeout: 30_000,
+    });
+
+    // The member code is the whole point of the page at the counter: six
+    // characters from the unambiguous alphabet the handler mints from.
+    await expect(page.getByText(/^[ACDEFGHJKMNPQRTUVWXY3469]{6}$/)).toBeVisible();
+
+    // Every card carries the welcome stamp, so the history is never empty and
+    // the progress line is never a bare zero.
+    await expect(page.getByText("Sello de bienvenida")).toBeVisible();
   });
 });
