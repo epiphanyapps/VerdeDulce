@@ -14,6 +14,18 @@
     "user_verification_types": [
       "email"
     ],
+    "groups": [
+      {
+        "ADMINS": {
+          "precedence": 0
+        }
+      },
+      {
+        "EDITORS": {
+          "precedence": 1
+        }
+      }
+    ],
     "mfa_configuration": "NONE",
     "password_policy": {
       "min_length": 8,
@@ -22,7 +34,365 @@
       "require_symbols": true,
       "require_uppercase": true
     },
+    "oauth": {
+      "identity_providers": [
+        "GOOGLE"
+      ],
+      "redirect_sign_in_uri": [
+        "http://localhost:3000/es/login/",
+        "http://localhost:3000/es/account/",
+        "http://localhost:3000/es/loyalty/",
+        "http://localhost:3000/es/admin/",
+        "http://localhost:3000/en/login/",
+        "http://localhost:3000/en/account/",
+        "http://localhost:3000/en/loyalty/",
+        "http://localhost:3000/en/admin/",
+        "https://verdedulce.com/es/login/",
+        "https://verdedulce.com/es/account/",
+        "https://verdedulce.com/es/loyalty/",
+        "https://verdedulce.com/es/admin/",
+        "https://verdedulce.com/en/login/",
+        "https://verdedulce.com/en/account/",
+        "https://verdedulce.com/en/loyalty/",
+        "https://verdedulce.com/en/admin/",
+        "https://www.verdedulce.com/es/login/",
+        "https://www.verdedulce.com/es/account/",
+        "https://www.verdedulce.com/es/loyalty/",
+        "https://www.verdedulce.com/es/admin/",
+        "https://www.verdedulce.com/en/login/",
+        "https://www.verdedulce.com/en/account/",
+        "https://www.verdedulce.com/en/loyalty/",
+        "https://www.verdedulce.com/en/admin/"
+      ],
+      "redirect_sign_out_uri": [
+        "http://localhost:3000/es/",
+        "http://localhost:3000/en/",
+        "https://verdedulce.com/es/",
+        "https://verdedulce.com/en/",
+        "https://www.verdedulce.com/es/",
+        "https://www.verdedulce.com/en/"
+      ],
+      "response_type": "code",
+      "scopes": [
+        "phone",
+        "email",
+        "openid",
+        "profile",
+        "aws.cognito.signin.user.admin"
+      ],
+      "domain": "83fe3ec07cf7c87ef25b.auth.us-east-1.amazoncognito.com"
+    },
     "unauthenticated_identities_enabled": true
+  },
+  "data": {
+    "url": "https://ly6ttsdnjzc5lb5jhmenpocabi.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_region": "us-east-1",
+    "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
+    "authorization_types": [
+      "AWS_IAM"
+    ],
+    "model_introspection": {
+      "version": 1,
+      "models": {
+        "LoyaltyCard": {
+          "name": "LoyaltyCard",
+          "fields": {
+            "customerSub": {
+              "name": "customerSub",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "memberCode": {
+              "name": "memberCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "stamps": {
+              "name": "stamps",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "rewardsRedeemed": {
+              "name": "rewardsRedeemed",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastStampAt": {
+              "name": "lastStampAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "LoyaltyCards",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "customerSub"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "loyaltyCardsByMemberCode",
+                "queryField": "listCardByMemberCode",
+                "fields": [
+                  "memberCode"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "customerSub",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "sub"
+                  },
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "operations": [
+                      "read"
+                    ],
+                    "groups": [
+                      "ADMINS",
+                      "EDITORS"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "customerSub",
+            "sortKeyFieldNames": []
+          }
+        },
+        "LoyaltyStamp": {
+          "name": "LoyaltyStamp",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "customerSub": {
+              "name": "customerSub",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "memberCode": {
+              "name": "memberCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "kind": {
+              "name": "kind",
+              "isArray": false,
+              "type": {
+                "enum": "LoyaltyStampKind"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "note": {
+              "name": "note",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "staffEmail": {
+              "name": "staffEmail",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "LoyaltyStamps",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "loyaltyStampsByCustomerSub",
+                "queryField": "listStampsByCustomer",
+                "fields": [
+                  "customerSub"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "customerSub",
+                    "allow": "owner",
+                    "operations": [
+                      "read"
+                    ],
+                    "identityClaim": "sub"
+                  },
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "operations": [
+                      "read"
+                    ],
+                    "groups": [
+                      "ADMINS",
+                      "EDITORS"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        }
+      },
+      "enums": {
+        "LoyaltyStampKind": {
+          "name": "LoyaltyStampKind",
+          "values": [
+            "WELCOME",
+            "EARNED",
+            "REDEEMED"
+          ]
+        }
+      },
+      "nonModels": {},
+      "mutations": {
+        "ensureLoyaltyCard": {
+          "name": "ensureLoyaltyCard",
+          "isArray": false,
+          "type": {
+            "model": "LoyaltyCard"
+          },
+          "isRequired": false
+        },
+        "punchLoyaltyCard": {
+          "name": "punchLoyaltyCard",
+          "isArray": false,
+          "type": {
+            "model": "LoyaltyCard"
+          },
+          "isRequired": false,
+          "arguments": {
+            "memberCode": {
+              "name": "memberCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "note": {
+              "name": "note",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "redeemLoyaltyReward": {
+          "name": "redeemLoyaltyReward",
+          "isArray": false,
+          "type": {
+            "model": "LoyaltyCard"
+          },
+          "isRequired": false,
+          "arguments": {
+            "memberCode": {
+              "name": "memberCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        }
+      }
+    }
   },
   "storage": {
     "aws_region": "us-east-1",
@@ -31,7 +401,21 @@
       {
         "name": "dulceDrive",
         "bucket_name": "amplify-d2eocpcmr90v03-ma-dulcedrivebucketa0ac03f2-4twzx6mshlo3",
-        "aws_region": "us-east-1"
+        "aws_region": "us-east-1",
+        "paths": {
+          "menu-pictures/*": {
+            "guest": [
+              "get",
+              "list"
+            ],
+            "entityidentity": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          }
+        }
       }
     ]
   },
