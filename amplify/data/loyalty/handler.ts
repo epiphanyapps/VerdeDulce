@@ -50,11 +50,35 @@ type CognitoIdentity = {
   groups?: string[] | null;
 };
 
+/**
+ * `fieldName` sits at the top level of the event Amplify hands a
+ * `a.handler.function()` resolver — not under `info`, which is the shape a
+ * direct Lambda resolver gets and is `undefined` here. Reading the wrong one
+ * threw `Cannot destructure property 'fieldName' of 'e.info'` on the first
+ * line of every invocation, so the loyalty page could never open a card.
+ *
+ * Both are declared, and `resolveField` prefers the real one while still
+ * accepting `info`, so this keeps working if the event shape is ever
+ * normalised toward the AppSync standard.
+ */
 type LoyaltyEvent = {
-  info: { fieldName: string };
+  fieldName?: string;
+  typeName?: string;
+  info?: { fieldName?: string };
   arguments: { memberCode?: string; note?: string };
   identity?: CognitoIdentity;
 };
+
+function resolveField(event: LoyaltyEvent): string {
+  const field = event.fieldName ?? event.info?.fieldName;
+  if (!field) {
+    // Keys only — the event carries the caller's email in its identity claims.
+    throw new Error(
+      `Could not determine the resolver field from event keys: ${Object.keys(event).join(", ")}`,
+    );
+  }
+  return field;
+}
 
 type Card = Schema["LoyaltyCard"]["type"];
 
@@ -171,7 +195,7 @@ async function redeem(memberCode: string, identity: CognitoIdentity | undefined)
  * rather than taking a per-field handler type.
  */
 export const handler = async (event: LoyaltyEvent): Promise<Card> => {
-  const { fieldName } = event.info;
+  const fieldName = resolveField(event);
 
   switch (fieldName) {
     case "ensureLoyaltyCard":
