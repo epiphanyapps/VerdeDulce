@@ -115,8 +115,15 @@ export function LoyaltyPunch() {
 
       {card && (
         <div className="mt-6 rounded-xl border border-border-subtle p-4">
-          <p className="text-sm text-on-surface-dim">
-            {t("cardFor", { email: card.email ?? "—" })}
+          {/*
+            The member code, not an email. Amplify authorises with the Cognito
+            access token, which carries no `email` claim, so the card has no
+            address to show — and the customer is standing there holding the
+            code anyway, which is the thing worth echoing back to confirm the
+            right card was found.
+          */}
+          <p className="font-display text-sm tracking-[0.2em] text-on-surface-dim">
+            {card.memberCode}
           </p>
           <p className="mt-1 font-display text-2xl">
             {t("stampsLine", { stamps: card.stamps, goal: STAMP_GOAL })}

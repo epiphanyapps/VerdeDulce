@@ -124,7 +124,6 @@
     "codeLabel": "Código de socio",
     "lookup": "Buscar",
     "notFound": "No hay tarjeta con ese código.",
-    "cardFor": "Tarjeta de {email}",
     "stampsLine": "{stamps} de {goal} sellos",
     "readyBadge": "Premio listo",
     "addStamp": "Agregar sello",

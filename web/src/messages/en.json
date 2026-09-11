@@ -124,7 +124,6 @@
     "codeLabel": "Member code",
     "lookup": "Look up",
     "notFound": "No card with that code.",
-    "cardFor": "Card for {email}",
     "stampsLine": "{stamps} of {goal} stamps",
     "readyBadge": "Reward ready",
     "addStamp": "Add stamp",
