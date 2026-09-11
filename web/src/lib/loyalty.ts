@@ -24,16 +24,22 @@ export type LoyaltyCard = {
   lastStampAt: string | null;
 };
 
+/**
+ * Note there is no `staffId` here on purpose. The field exists on the model as
+ * an audit record for staff and ops, but the customer-facing history never
+ * shows who issued a stamp — and selecting a field the deployed schema has not
+ * gained yet fails the whole query, which would break this page during any
+ * deploy that adds one.
+ */
 export type LoyaltyStamp = {
   id: string;
   kind: StampKind | null;
   note: string | null;
-  staffId: string | null;
   createdAt: string;
 };
 
 const CARD_FIELDS = `customerSub memberCode stamps rewardsRedeemed lastStampAt`;
-const STAMP_FIELDS = `id kind note staffId createdAt`;
+const STAMP_FIELDS = `id kind note createdAt`;
 
 const ENSURE_CARD = `mutation EnsureLoyaltyCard { ensureLoyaltyCard { ${CARD_FIELDS} } }`;
 
