@@ -19,7 +19,6 @@ export type StampKind = "WELCOME" | "EARNED" | "REDEEMED";
 export type LoyaltyCard = {
   customerSub: string;
   memberCode: string;
-  email: string | null;
   stamps: number;
   rewardsRedeemed: number;
   lastStampAt: string | null;
@@ -29,12 +28,12 @@ export type LoyaltyStamp = {
   id: string;
   kind: StampKind | null;
   note: string | null;
-  staffEmail: string | null;
+  staffId: string | null;
   createdAt: string;
 };
 
-const CARD_FIELDS = `customerSub memberCode email stamps rewardsRedeemed lastStampAt`;
-const STAMP_FIELDS = `id kind note staffEmail createdAt`;
+const CARD_FIELDS = `customerSub memberCode stamps rewardsRedeemed lastStampAt`;
+const STAMP_FIELDS = `id kind note staffId createdAt`;
 
 const ENSURE_CARD = `mutation EnsureLoyaltyCard { ensureLoyaltyCard { ${CARD_FIELDS} } }`;
 

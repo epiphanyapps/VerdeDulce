@@ -23,7 +23,6 @@ const schema = a
       .model({
         customerSub: a.id().required(),
         memberCode: a.string().required(),
-        email: a.string(),
         /** Stamps on the current card, 0..STAMP_GOAL. Reset on redemption. */
         stamps: a.integer().required(),
         /** Completed cards, kept across resets so the history is not lost. */
@@ -53,8 +52,15 @@ const schema = a
         memberCode: a.string().required(),
         kind: a.enum(["WELCOME", "EARNED", "REDEEMED"]),
         note: a.string(),
-        /** The staff account that issued it; empty for WELCOME. */
-        staffEmail: a.string(),
+        /**
+         * The staff account that issued it; empty for WELCOME.
+         *
+         * A Cognito username or `sub`, not an email. Amplify authorises GraphQL
+         * with the *access* token, which carries `sub`, `username` and
+         * `cognito:groups` but never `email` — so the previous `staffEmail`
+         * field could only ever have been null in production.
+         */
+        staffId: a.string(),
       })
       .secondaryIndexes((index) => [
         index("customerSub").queryField("listStampsByCustomer"),

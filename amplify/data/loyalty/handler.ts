@@ -51,6 +51,21 @@ type CognitoIdentity = {
 };
 
 /**
+ * Who performed a staff action, for the audit trail.
+ *
+ * Deliberately not an email. Amplify authorises GraphQL with the Cognito
+ * *access* token (see `graphqlAuth.mjs` in @aws-amplify/api-graphql, which
+ * calls `tokens.accessToken.toString()` for the `userPool` auth mode), and an
+ * access token carries `sub`, `username` and `cognito:groups` but never
+ * `email`. Reading `claims.email` here returned undefined on every real call,
+ * so the trail recorded no actor at all. `username` is present and identifies
+ * the account uniquely, which is what an audit trail actually needs.
+ */
+function actorId(identity: CognitoIdentity | undefined): string | undefined {
+  return identity?.username ?? identity?.sub;
+}
+
+/**
  * `fieldName` sits at the top level of the event Amplify hands a
  * `a.handler.function()` resolver — not under `info`, which is the shape a
  * direct Lambda resolver gets and is `undefined` here. Reading the wrong one
@@ -72,7 +87,7 @@ type LoyaltyEvent = {
 function resolveField(event: LoyaltyEvent): string {
   const field = event.fieldName ?? event.info?.fieldName;
   if (!field) {
-    // Keys only — the event carries the caller's email in its identity claims.
+    // Keys only, never values — the event carries the caller's identity.
     throw new Error(
       `Could not determine the resolver field from event keys: ${Object.keys(event).join(", ")}`,
     );
@@ -105,8 +120,6 @@ async function ensureCard(identity: CognitoIdentity | undefined): Promise<Card> 
   const existing = await client.models.LoyaltyCard.get({ customerSub: sub });
   if (existing.data) return existing.data;
 
-  const email = typeof identity?.claims?.email === "string" ? identity.claims.email : undefined;
-
   // A collision is a ~1-in-191M event, but it would silently attach a second
   // customer to somebody else's card, so it is checked rather than assumed.
   let memberCode = mintCode();
@@ -120,7 +133,6 @@ async function ensureCard(identity: CognitoIdentity | undefined): Promise<Card> 
     await client.models.LoyaltyCard.create({
       customerSub: sub,
       memberCode,
-      email,
       stamps: WELCOME_STAMPS,
       rewardsRedeemed: 0,
       lastStampAt: new Date().toISOString(),
@@ -158,7 +170,7 @@ async function punch(memberCode: string, note: string | undefined, identity: Cog
     memberCode: card.memberCode,
     kind: "EARNED",
     note,
-    staffEmail: typeof identity?.claims?.email === "string" ? identity.claims.email : undefined,
+    staffId: actorId(identity),
   });
 
   return updated;
@@ -184,7 +196,7 @@ async function redeem(memberCode: string, identity: CognitoIdentity | undefined)
     customerSub: card.customerSub,
     memberCode: card.memberCode,
     kind: "REDEEMED",
-    staffEmail: typeof identity?.claims?.email === "string" ? identity.claims.email : undefined,
+    staffId: actorId(identity),
   });
 
   return updated;
