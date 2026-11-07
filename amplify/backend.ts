@@ -5,7 +5,6 @@ import { data } from "./data/resource";
 import { storage } from "./storage/resource";
 import { EmailIdentity } from "aws-cdk-lib/aws-ses";
 import { Stack } from "aws-cdk-lib/core";
-import * as iam from "aws-cdk-lib/aws-iam";
 
 import { Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { CfnApp } from "aws-cdk-lib/aws-pinpoint";
@@ -25,27 +24,28 @@ const { cfnUserPool } = backend.auth.resources.cfnResources;
 
 const authStack = Stack.of(cfnUserPool);
 
-const email = EmailIdentity.fromEmailIdentityName(
+/**
+ * Cognito sends verification and password-reset mail through SES from this
+ * account. verdedulce.com receives no mail (owner decision 2026-11-07: contact
+ * is WhatsApp only), so mail goes out from a no-reply address and any reply is
+ * routed to a mailbox that is actually read.
+ *
+ * The SourceArn is the verified *domain* identity, which authorises sending
+ * from any address on verdedulce.com, so noreply@ needs no identity of its own.
+ * `fromEmailIdentityName` only imports the identity; it creates no resource.
+ */
+const emailIdentity = EmailIdentity.fromEmailIdentityName(
   authStack,
   "EmailIdentity",
-  // your email configured for use in SES
-  // process.env.EMAIL,
-  "contact@verdedulce.com"
+  "verdedulce.com"
 );
 
 cfnUserPool.emailConfiguration = {
   emailSendingAccount: "DEVELOPER",
-  sourceArn: email.emailIdentityArn,
+  sourceArn: emailIdentity.emailIdentityArn,
+  from: "Verde Dulce <noreply@verdedulce.com>",
+  replyToEmailAddress: "walter@epiphanyapps.com",
 };
-
-const statement = new iam.PolicyStatement({
-  sid: "AllowSESSendEmail",
-  actions: ["ses:SendEmail"],
-  resources: ["*"], // Replace with specific SES resource ARN if needed
-});
-
-// const something = backend.registerUserFunction.resources.lambda;
-// something.addToRolePolicy(statement);
 
 const analyticsStack = backend.createStack("analytics-stack");
 
