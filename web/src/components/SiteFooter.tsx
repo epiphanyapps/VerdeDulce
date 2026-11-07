@@ -82,11 +82,6 @@ export async function SiteFooter() {
                 {t("facebook")}
               </a>
             </li>
-            <li>
-              <a href={`mailto:${siteConfig.contactEmail}`} className="hover:underline">
-                {siteConfig.contactEmail}
-              </a>
-            </li>
           </ul>
 
           <p className="mt-6 text-sm">{t("hours")}</p>
