@@ -133,6 +133,12 @@ failing. Two accounts exist for this: `e2e-user@verdedulce.com` and
 `e2e-admin@verdedulce.com` (in the `ADMINS` group). The password is a repo
 secret, `E2E_PASSWORD`.
 
+verdedulce.com receives no mail (contact is WhatsApp only), so these two
+accounts can never receive a Cognito email: no verification codes, no
+password resets. The specs sign in with the password; if it is ever lost,
+reset it with `aws cognito-idp admin-set-user-password` rather than the
+"forgot password" flow.
+
 Set `BASE_URL` to run the same specs against a deployed origin:
 
 ```bash

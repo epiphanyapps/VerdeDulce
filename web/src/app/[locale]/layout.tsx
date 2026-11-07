@@ -139,7 +139,6 @@ export default async function LocaleLayout({
             areaServed: ["Portoviejo", "12 de Marzo", "18 de Octubre", "Andrés de Vera"],
             servesCuisine: locale === "es" ? "Saludable" : "Healthy",
             priceRange: "$",
-            email: siteConfig.contactEmail,
             telephone: `+${siteConfig.whatsapp.phone}`,
             address: {
               "@type": "PostalAddress",

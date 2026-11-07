@@ -141,10 +141,8 @@ export const FaqScreen: FC = observer(function FaqScreen() {
             style={$title}
           />
           <Text
-            text="¡Valoramos tus comentarios! Puedes comunicarte con nuestro equipo de servicio al
-        cliente a través del formulario de contacto en nuestro sitio web, o puedes enviarnos un
-        correo electrónico a contact@verdedulce.com. Siempre estamos buscando formas de mejorar tu
-        experiencia."
+            text="¡Valoramos tus comentarios! Escríbenos por WhatsApp; es la forma más rápida de
+        llegar a nosotros. Siempre estamos buscando formas de mejorar tu experiencia."
             style={$content}
           />
         </View>

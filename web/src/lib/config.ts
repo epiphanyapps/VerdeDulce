@@ -22,7 +22,6 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/profile.php?id=61564202236840",
     instagram: "https://www.instagram.com/verdedulce_",
   },
-  contactEmail: "contact@verdedulce.com",
 } as const;
 
 /** Deep-links to WhatsApp with the order message pre-filled. */
